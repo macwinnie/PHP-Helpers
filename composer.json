@@ -23,5 +23,8 @@
         "psr-4" : {
             "macwinnie\\RegexFunctionTests\\" : "tests/"
         }
+    },
+    "scripts": {
+        "test": "vendor/bin/behat"
     }
 }
