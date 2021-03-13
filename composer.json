@@ -1,0 +1,27 @@
+{
+    "name": "macwinnie/regexfunctions",
+    "description": "reusable RegEx functions",
+    "type": "library",
+    "license": "CC-BY-SA-4.0",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "macwinnie",
+            "email": "dev@macwinnie.me"
+        }
+    ],
+    "require-dev": {
+        "behat/behat": "^3.8",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4" : {
+            "macwinnie\\RegexFunctionTests\\" : "tests/"
+        }
+    }
+}
