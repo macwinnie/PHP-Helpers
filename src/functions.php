@@ -2,8 +2,14 @@
 
 namespace macwinnie\RegexFunctions;
 
+const REGEX_DELIMITER = '/';
+
 /**
  * function to translate format string to regex to retrieve entry values
+ *
+ * `sscanf` should do it in most situations – but especially if the format doesn't
+ * contain spaces after conversion specifications, it fails. So with
+ * DN-Definitions with LDAP.
  *
  * @param  string $format format string to be analyzed
  * @return string         RegEx to be used further
@@ -11,11 +17,36 @@ namespace macwinnie\RegexFunctions;
 function format2regex ( $format ) {
     $match = '(.*?)';
 
-    $regex = '/%([0-9]+\$)?((-|\+| |0|\'.)+)?([0-9]+)?(\.[0-9]+)?([bcdeEfFgGosxX])/x';
-    $parts = preg_split( $regex, $format );
-    $parts = array_map( 'preg_quote', $parts );
+    // regex for matching format conversion specifications
+    // https://regex101.com/r/FDGzbV/1/
+    $regex = REGEX_DELIMITER . '%([0-9]+\$)?((-|\+| |0|\'.)+)?([0-9]+)?(\.[0-9]+)?([bcdeEfFgGosxX])' . REGEX_DELIMITER . 'x';
 
-    return '/' . implode( $match, $parts ) . '/';
+    /*
+     * structure of matches – according to documentation of PHP function `sprintf`:
+     *
+     *        0  full match
+     * IGNORE 1  placeholder
+     *        2  Flags [+|-| |0|('.)]
+     * IGNORE 3  last of Flags
+     *        4  min width
+     *        5  max with / # decimals
+     *        6  identifier
+     */
+
+    $parts = preg_split( $regex, $format );
+    $parts = array_map( 'macwinnie\RegexFunctions\delimiter_preg_quote', $parts );
+
+    return REGEX_DELIMITER . implode( $match, $parts ) . REGEX_DELIMITER;
+}
+
+/**
+ * helper function to quote regular delimiter / in RegEx String
+ *
+ * @param  string $string string to be quoted
+ * @return string         quoted string
+ */
+function delimiter_preg_quote ( $string ) {
+    return preg_quote( $string, REGEX_DELIMITER );
 }
 
 /**
