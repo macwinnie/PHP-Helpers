@@ -12,3 +12,11 @@ var_dump( rf\format2regex( 'uid=%s,ou=people,dc=example,dc=com' ) );
 // string(43) "/uid\=(.*?),ou\=people,dc\=example,dc\=com/"
 
 ```
+
+## Composer
+
+Installable by running `composer require macwinnie/regexfunctions`.
+
+## Licence
+
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
