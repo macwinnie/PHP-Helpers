@@ -11,8 +11,8 @@
         }
     ],
     "require-dev": {
-        "behat/behat": "^3.8",
-        "phpunit/phpunit": "^9.5"
+        "behat/behat": ">=3.8",
+        "phpunit/phpunit": ">=9.5"
     },
     "autoload": {
         "files": [
@@ -26,5 +26,14 @@
     },
     "scripts": {
         "test": "vendor/bin/behat"
+    },
+    "archive": {
+        "exclude": [
+            "/docs",
+            "/tests",
+            "/.github",
+            "/.editorconfig",
+            "/.behat.yml"
+        ]
     }
 }
