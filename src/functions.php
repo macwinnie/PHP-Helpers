@@ -1,14 +1,13 @@
 <?php
 
 /**
- * This file is a helper file for helper function used for coding with
- * RegExes.
+ * This file is a helper file for helper functions used for coding with RegExes.
  *
  * It is published unter CC BY-SA 4.0 license.
  *
  * Source: [macwinnie @ GitHub](https://github.com/macwinnie/RegexFunctions-PHP/)
  *
- * [Documentation](https://macwinnie.github.io/RegexFunctions-PHP) can be found online.
+ * [Documentation](https://macwinnie.github.io/RegexFunctions-PHP/files/src-functions.html) can be found online.
  *
  * Installable by using [Composer](https://packagist.org/packages/macwinnie/regexfunctions)
  */
@@ -31,7 +30,7 @@ const REGEX_DELIMITER = '/';
  * fails. Especially that's the case with LDAP DN definitions, which is why
  * this function was coded.
  *
- * Usage could be i.e.
+ * Usage could be e.g.
  *
  * ```php
  * <?php
