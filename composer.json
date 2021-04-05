@@ -26,14 +26,5 @@
     },
     "scripts": {
         "test": "vendor/bin/behat"
-    },
-    "archive": {
-        "exclude": [
-            "/docs",
-            "/tests",
-            "/.github",
-            "/.editorconfig",
-            "/.behat.yml"
-        ]
     }
 }

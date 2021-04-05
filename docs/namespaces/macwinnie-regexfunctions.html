@@ -98,7 +98,8 @@
     <span>
         &nbsp;= &#039;/&#039;                    </span>
 </dt>
-<dd></dd>
+<dd>regex delimiter that can be used in combination with functions by this
+helper file</dd>
 
                         <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/macwinnie-regexfunctions.html#function_format2regex">format2regex()</a>
@@ -117,7 +118,7 @@
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/macwinnie-regexfunctions.html#function_getRegexOccurences">getRegexOccurences()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>function to fetch RegEx occurences from string / template</dd>
 
@@ -138,19 +139,22 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">5</span>
+    <span class="phpdocumentor-element-found-in__line">24</span>
 </aside>
 
-    
+        <p class="phpdocumentor-summary">regex delimiter that can be used in combination with functions by this
+helper file</p>
+
     <code class="phpdocumentor-signature phpdocumentor-code ">
     <span class="phpdocumentor-signature__visibility">public</span>
-    <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__type">string</span>
     <span class="phpdocumentor-signature__name">REGEX_DELIMITER</span>
     = <span class="phpdocumentor-signature__default-value">&#039;/&#039;</span>
 </code>
 
 
-    
+        <section class="phpdocumentor-description"></section>
+
     
 
 </article>
@@ -169,18 +173,53 @@
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">79</span>
 </aside>
 
         <p class="phpdocumentor-summary">function to translate format string to regex to retrieve entry values</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">format2regex</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$format</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                <span class="phpdocumentor-signature__name">format2regex</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$format</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$match</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$fullMatch</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
-        <section class="phpdocumentor-description"><p><code class="prettyprint">sscanf</code> should do it in most situations – but especially if the format doesn't
-contain spaces after conversion specifications, it fails. So with
-DN-Definitions with LDAP.</p>
+        <section class="phpdocumentor-description"><p><code class="prettyprint">sscanf</code> should be sufficient in most situations – but especially if the
+format string doesn't contain spaces after conversion specifications, it
+fails. Especially that's the case with LDAP DN definitions, which is why
+this function was coded.</p>
+<p>Usage could be i.e.</p>
+<pre class="prettyprint"><code class="language-php">&lt;?php
+
+use macwinnie\RegexFunctions as rf;
+
+$rGroups  = [
+    'DN'  =&gt; [ 0 ],
+    'uid' =&gt; [ 1 ],
+    'dc1' =&gt; [ 2 ],
+    'dc2' =&gt; [ 3 ],
+    'dc3' =&gt; [ 4 ],
+];
+
+$dnFormat = 'uid=%s,ou=people,dc=%s,dc=%s,dc=%s';
+$regex    = rf\format2regex( $dnFormat, null, true );
+
+$mappings = rf\getRegexOccurences( $regex, 'uid=jdoe,ou=people,dc=compartment,dc=example,dc=com', $rGroups );
+
+echo( json_encode( $mappings, JSON_PRETTY_PRINT ) );
+
+// [
+//     {
+//         &quot;full&quot;: &quot;uid=jdoe,ou=people,dc=compartment,dc=example,dc=com&quot;,
+//         &quot;length&quot;: 51,
+//         &quot;offset&quot;: 0,
+//         &quot;DN&quot;: &quot;uid=jdoe,ou=people,dc=compartment,dc=example,dc=com&quot;,
+//         &quot;uid&quot;: &quot;jdoe&quot;,
+//         &quot;dc1&quot;: &quot;compartment&quot;,
+//         &quot;dc2&quot;: &quot;example&quot;,
+//         &quot;dc3&quot;: &quot;com&quot;
+//     }
+// ]
+
+</code></pre>
 </section>
 
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -194,9 +233,42 @@ DN-Definitions with LDAP.</p>
 </section>
 
             </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$match</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>RegEx string to replace format parts – defaults to <code class="prettyprint">(.*?)</code></p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$fullMatch</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>set true for a full match</p>
+</section>
+
+            </dd>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">todo</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                                 <section class="phpdocumentor-description"><p>handling of '%%' within format string what equals single '%' within a string</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
     
 </article>
@@ -208,14 +280,14 @@ DN-Definitions with LDAP.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">48</span>
+    <span class="phpdocumentor-element-found-in__line">116</span>
 </aside>
 
         <p class="phpdocumentor-summary">helper function to quote regular delimiter / in RegEx String</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">delimiter_preg_quote</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$string</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                <span class="phpdocumentor-signature__name">delimiter_preg_quote</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$string</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delimiter</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -227,6 +299,16 @@ DN-Definitions with LDAP.</p>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
                     <section class="phpdocumentor-description"><p>string to be quoted</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$delimiter</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>delimiter to be used for quoting – defaults to <code class="prettyprint">null</code>
+to use REGEX_DELIMITER defined by this helper file</p>
 </section>
 
             </dd>
@@ -244,14 +326,14 @@ DN-Definitions with LDAP.</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">60</span>
+    <span class="phpdocumentor-element-found-in__line">132</span>
 </aside>
 
         <p class="phpdocumentor-summary">function to fetch RegEx occurences from string / template</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility"></span>
-                <span class="phpdocumentor-signature__name">getRegexOccurences</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$template</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$group_attributes</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                <span class="phpdocumentor-signature__name">getRegexOccurences</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$regex</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$template</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$group_attributes</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
 
         <section class="phpdocumentor-description"></section>
 

@@ -3,7 +3,7 @@ Search.appendIndex(
                 {
             "fqsen": "\\macwinnie\\RegexFunctions\\REGEX_DELIMITER",
             "name": "REGEX_DELIMITER",
-            "summary": "",
+            "summary": "regex\u0020delimiter\u0020that\u0020can\u0020be\u0020used\u0020in\u0020combination\u0020with\u0020functions\u0020by\u0020this\nhelper\u0020file",
             "url": "namespaces/macwinnie-regexfunctions.html#constant_REGEX_DELIMITER"
         },                {
             "fqsen": "\\macwinnie\\RegexFunctions\\format2regex\u0028\u0029",
