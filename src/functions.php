@@ -5,14 +5,14 @@
  *
  * It is published unter CC BY-SA 4.0 license.
  *
- * Source: [macwinnie @ GitHub](https://github.com/macwinnie/RegexFunctions-PHP/)
+ * Source: [macwinnie @ GitHub](https://github.com/macwinnie/PHP-Helpers/)
  *
- * [Documentation](https://macwinnie.github.io/RegexFunctions-PHP/files/src-functions.html) can be found online.
+ * [Documentation](https://macwinnie.github.io/PHP-Helpers/files/src-functions.html) can be found online.
  *
- * Installable by using [Composer](https://packagist.org/packages/macwinnie/regexfunctions)
+ * Installable by using [Composer](https://packagist.org/packages/macwinnie/phphelpers)
  */
 
-namespace macwinnie\RegexFunctions;
+namespace macwinnie\PHPHelpers;
 
 /**
  * regex delimiter that can be used in combination with functions by this
@@ -35,7 +35,7 @@ const REGEX_DELIMITER = '/';
  * ```php
  * <?php
  *
- * use macwinnie\RegexFunctions as rf;
+ * use macwinnie\PHPHelpers as rf;
  *
  * $rGroups  = [
  *     'DN'  => [ 0 ],
@@ -98,7 +98,7 @@ function format2regex ( $format, $match = null, $fullMatch = false ) {
      */
 
     $parts = preg_split( $regex, $format );
-    $parts = array_map( 'macwinnie\RegexFunctions\delimiter_preg_quote', $parts );
+    $parts = array_map( 'macwinnie\PHPHelpers\delimiter_preg_quote', $parts );
 
     return REGEX_DELIMITER . ( $fullMatch ? '^' : '' ) . implode( $match, $parts ) . ( $fullMatch ? '$' : '' ) . REGEX_DELIMITER;
 }

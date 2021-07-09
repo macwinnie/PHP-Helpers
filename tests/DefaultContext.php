@@ -1,8 +1,8 @@
 <?php
 
-namespace macwinnie\RegexFunctionTests;
+namespace macwinnie\PHPHelpersTests;
 
-use macwinnie\RegexFunctions as rf;
+use macwinnie\PHPHelpers as rf;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
@@ -27,7 +27,7 @@ class DefaultContext implements Context {
      * @When running the :fkt function
      */
     public function runningTheFunction( $fkt ) {
-        $fkt = '\\macwinnie\\RegexFunctions\\' . $fkt;
+        $fkt = '\\macwinnie\\PHPHelpers\\' . $fkt;
         if ( is_array( $this->results[ 'fkt_input' ] ) ) {
             $this->results[ 'fkt_result' ] = call_user_func_array( $fkt, $this->results[ 'fkt_input' ] );
         }

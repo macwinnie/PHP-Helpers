@@ -1,6 +1,6 @@
 # RegEx Functions
 
-This small repo is used to maintain my regularly reused RegEx functions.
+This small repo is used to maintain my regularly reused PHP functions, e.g. RegEx functions.
 
 ## Usage
 
@@ -8,7 +8,7 @@ They can be used within any code for example like that:
 
 ```php
 
-use \macwinnie\RegexFunctions as rf;
+use \macwinnie\PHPHelpers as rf;
 
 var_dump( rf\format2regex( 'uid=%s,ou=people,dc=example,dc=com' ) );
 // string(43) "/uid\=(.*?),ou\=people,dc\=example,dc\=com/"
@@ -20,7 +20,7 @@ var_dump( rf\format2regex( 'uid=%s,ou=people,dc=example,dc=com' ) );
 This repo is meant to be included within other projects, so simply run this command to require it:
 
 ```sh
-composer require macwinnie/regexfunctions
+composer require macwinnie/phphelpers
 ```
 
 Since the tool is also tested, please ensure to run `composer install --no-dev` in production stages, so no unnecessary tools are installed and autoloaded within your production environment!

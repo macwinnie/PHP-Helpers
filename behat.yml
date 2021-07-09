@@ -17,7 +17,7 @@ default: &default
         - "%paths.base%/tests/features"
 
       contexts:
-        - "macwinnie\\RegexFunctionTests\\DefaultContext"
+        - "macwinnie\\PHPHelpersTests\\DefaultContext"
 
 
   formatters:

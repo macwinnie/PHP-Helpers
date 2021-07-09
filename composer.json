@@ -1,6 +1,6 @@
 {
-    "name": "macwinnie/regexfunctions",
-    "description": "reusable RegEx functions",
+    "name": "macwinnie/phphelpers",
+    "description": "reusable PHP functions, e.g. RegEx ones",
     "type": "library",
     "license": "CC-BY-SA-4.0",
     "minimum-stability": "stable",
@@ -21,7 +21,7 @@
     },
     "autoload-dev": {
         "psr-4" : {
-            "macwinnie\\RegexFunctionTests\\" : "tests/"
+            "macwinnie\\PHPHelpersTests\\" : "tests/"
         }
     },
     "scripts": {
