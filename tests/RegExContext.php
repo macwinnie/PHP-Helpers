@@ -14,7 +14,7 @@ use Behat\Behat\Hook\Scope\AfterScenarioScope;
 /**
  * Defines application features from the specific context.
  */
-class DefaultContext implements Context {
+class RegExContext implements Context {
 
     /**
      * @Given the input string

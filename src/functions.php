@@ -163,3 +163,43 @@ function getRegexOccurences ( $regex, $template, $group_attributes = null ) {
     }
     return $returns;
 }
+
+/**
+ * function to retrieve a specific value out of a given
+ * (nested) array by dot-joined following keys.
+ *
+ * @param  array  $array      array to be searched
+ * @param  string $dotted_key dot-joined key-tree to retrieve the value
+ * @param  mixed  $default    default value if key-tree not found;
+ *                            defaults to NULL
+ *
+ * @return mixed
+ */
+function getArrayValue ( $array, $dotted_key, $default = NULL ) {
+    $returnDefault = False;
+
+    $keytree = explode( '.', $dotted_key );
+    $prepend = '';
+
+    foreach ( $keytree as $k ) {
+        if ( is_array( $array ) and isset( $array[ $prepend . $k ] ) ) {
+            $array = $array[ $prepend . $k ];
+            $prepend = '';
+            $returnDefault = False;
+        }
+        elseif ( is_array( $array ) ) {
+            $prepend .= $k . '.';
+            $returnDefault = True;
+        }
+        else {
+            $returnDefault = True;
+        }
+    }
+
+    if ( $returnDefault ) {
+        return $default;
+    }
+    else {
+        return $array;
+    }
+}
