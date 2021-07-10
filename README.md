@@ -32,18 +32,22 @@ All functionalities are developed along the BDD (behaviour driven development) p
 To run the tests, you'll need the full composer installation with all dependencies, the production and development ones. For example use `devopsansiblede/apache:latest` to run everything that follows:
 
 ```sh
-docker run -p80:80 -d --name twigform -v $(pwd):/var/www/html devopsansiblede/apache
-docker exec -it -u www-data twigform composer install
-docker exec -it -u www-data twigform vendor/bin/behat
+docker pull devopsansiblede/apache
+docker run -p80:80 -d --name phphelpers -v $(pwd):/var/www/html devopsansiblede/apache
+docker exec -it -u www-data phphelpers composer install
+docker exec -it -u www-data phphelpers vendor/bin/behat
 ```
 
 ## Documentation
+
+[Documentation current master state](https://macwinnie.github.io/PHP-Helpers/files/src-functions.html)
 
 The functions within this repository are documented with DocBlock style. To visualize the documentation, the project is using [phpDocumentor](https://phpdoc.org/) to generate a viewable website with the documentation within the directory `/docs`.
 
 To create the latest documentation, simply run the following Docker command:
 
 ```sh
+docker pull phpdoc/phpdoc:3
 docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --setting=graphs.enabled=true -d src -t docs
 ```
 

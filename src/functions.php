@@ -172,7 +172,6 @@ function getRegexOccurences ( $regex, $template, $group_attributes = null ) {
  * @param  string $dotted_key dot-joined key-tree to retrieve the value
  * @param  mixed  $default    default value if key-tree not found;
  *                            defaults to NULL
- *
  * @return mixed
  */
 function getArrayValue ( $array, $dotted_key, $default = NULL ) {
