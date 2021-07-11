@@ -61,4 +61,30 @@ class ArrayContext implements Context {
     public function iShouldGetTheValue( $return ) {
         Assert::assertEquals( $return, static::$foundValue );
     }
+
+    /**
+     * @When I extract – search and remove – the key-tree :keytree
+     */
+    public function iExtractSearchAndRemoveTheKeyTree( $keytree ) {
+        static::$foundValue = rf\extractArrayValue( static::$inspectedArray, $keytree );
+    }
+
+    /**
+     * @Then the JSON representation of the remaining array should look like
+     */
+    public function theJsonRepresentationOfTheRemainingArrayShouldLookLike( PyStringNode $string ) {
+        // analyze given JSON representation
+        try {
+            $newJson = json_decode( $string, true );
+            Assert::assertEquals( JSON_ERROR_NONE, json_last_error() );
+        } catch ( ExpectationFailedException $e ) {
+            throw new ExpectationFailedException( 'JSON Error: ' . json_last_error_msg() );
+        }
+        ksort( $newJson );
+        $string  = json_encode( $newJson );
+        $curArr  = static::$inspectedArray;
+        ksort( $curArr );
+        $compare = json_encode( $curArr );
+        Assert::assertEquals( $string, $compare );
+    }
 }

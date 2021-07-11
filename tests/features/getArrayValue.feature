@@ -54,3 +54,25 @@ Feature: get array value
       """
     When I search for the key-tree "lorem.ipsum.dolor"
     Then I should get the value "sit"
+
+  @getArrayValue
+  Scenario: Nested array with dotted key and removal test
+    Given the JSON array
+      """
+      {
+        "lorem.ipsum": {
+          "dolor": "sit",
+          "amet" : "consectetur"
+        }
+      }
+      """
+    When I extract – search and remove – the key-tree "lorem.ipsum.dolor"
+    Then I should get the value "sit"
+    And the JSON representation of the remaining array should look like
+      """
+      {
+        "lorem.ipsum": {
+          "amet" : "consectetur"
+        }
+      }
+      """

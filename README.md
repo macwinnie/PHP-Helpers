@@ -48,6 +48,7 @@ To create the latest documentation, simply run the following Docker command:
 
 ```sh
 docker pull phpdoc/phpdoc:3
+rm -rf docs
 docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --setting=graphs.enabled=true -d src -t docs
 ```
 

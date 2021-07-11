@@ -125,8 +125,8 @@ function delimiter_preg_quote ( $string, $delimiter = null ) {
  * @param  string  $template the template string
  *
  * @return array             fetch additional group elements and put it into key;
- *                           if value is `[ 'name' => [ 1,2,3 ] ]`, the tool will return the
- *                           first non-empty group out of 1, 2 or 3
+ *                           if value is `[ 'name' => [ 1,2,3 ] ]`, the tool will return
+ *                           the first non-empty group out of 1, 2 or 3
  */
 function getRegexOccurences ( $regex, $template, $group_attributes = null ) {
     preg_match_all( $regex, $template, $matches, PREG_OFFSET_CAPTURE );
@@ -168,26 +168,33 @@ function getRegexOccurences ( $regex, $template, $group_attributes = null ) {
  * function to retrieve a specific value out of a given
  * (nested) array by dot-joined following keys.
  *
- * @param  array  $array      array to be searched
- * @param  string $dotted_key dot-joined key-tree to retrieve the value
- * @param  mixed  $default    default value if key-tree not found;
- *                            defaults to NULL
+ * @param  array   $array         array to be searched
+ * @param  string  $dotted_key    dot-joined key-tree to retrieve the value
+ * @param  mixed   $default       default value if key-tree not found;
+ *                                defaults to NULL
+ * @param  boolean $returnKeyTree if set `True`, the return value is an array
+ *                                with two values: `keyTree` and `value`.
+ *                                `NULL` if default has to be returned .
+ *
  * @return mixed
  */
-function getArrayValue ( $array, $dotted_key, $default = NULL ) {
+function getArrayValue ( $array, $dotted_key, $default = NULL, $returnKeyTree = False ) {
     $returnDefault = False;
 
     $keytree = explode( '.', $dotted_key );
     $prepend = '';
+    $ktfound = [];
 
     foreach ( $keytree as $k ) {
-        if ( is_array( $array ) and isset( $array[ $prepend . $k ] ) ) {
-            $array = $array[ $prepend . $k ];
-            $prepend = '';
+        $key = $prepend . $k;
+        if ( is_array( $array ) and isset( $array[ $key ] ) ) {
+            $array         = $array[ $key ];
+            $ktfound[]     = $key;
+            $prepend       = '';
             $returnDefault = False;
         }
         elseif ( is_array( $array ) ) {
-            $prepend .= $k . '.';
+            $prepend       = $key . '.';
             $returnDefault = True;
         }
         else {
@@ -196,9 +203,63 @@ function getArrayValue ( $array, $dotted_key, $default = NULL ) {
     }
 
     if ( $returnDefault ) {
-        return $default;
+        $value   = $default;
+        $ktfound = NULL;
     }
     else {
-        return $array;
+        $value = $array;
+    }
+
+    if ( $returnKeyTree ) {
+        return [
+            'keyTree' => $ktfound,
+            'value'   => $value,
+        ];
+    }
+    else {
+        return $value;
+    }
+}
+
+/**
+ * extended function `getArrayValue`: will remove value (and key) from array
+ * if found
+ *
+ * @param  array   $array         array to be searched
+ * @param  string  $dotted_key    dot-joined key-tree to retrieve the value
+ * @param  mixed   $default       default value if key-tree not found;
+ *                                defaults to NULL
+ *
+ * @return mixed
+ */
+function extractArrayValue ( &$array, $dotted_key, $default = NULL ) {
+    // get key tree and value
+    $x = getArrayValue( $array, $dotted_key, $default, true );
+    $keyTree = $x[ 'keyTree' ];
+    $value   = $x[ 'value' ];
+    $subvals = [];
+    // remove found value and key from array
+    if ( $keyTree != NULL and is_array( $keyTree ) ) {
+        rmValueByKeyTree( $array, $keyTree );
+    }
+    // return value
+    return $value;
+}
+
+/**
+ * function to remove a value specified by the key-tree from an array
+ *
+ * @param  array  &$array   array, the value should be removed from
+ * @param  array  $keytree  ordered list of array keys
+ *
+ * @return void
+ */
+function rmValueByKeyTree ( &$array, $keytree = [] ) {
+    $key = array_shift( $keytree );
+    if ( is_array( $keytree ) and ! empty( $keytree ) ) {
+        rmValueByKeyTree( $array[ $key ], $keytree );
+    }
+    else {
+        unset( $array[ $key ] );
     }
 }

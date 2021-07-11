@@ -26,6 +26,16 @@ Search.appendIndex(
             "summary": "function\u0020to\u0020retrieve\u0020a\u0020specific\u0020value\u0020out\u0020of\u0020a\u0020given\n\u0028nested\u0029\u0020array\u0020by\u0020dot\u002Djoined\u0020following\u0020keys.",
             "url": "namespaces/macwinnie-phphelpers.html#function_getArrayValue"
         },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\extractArrayValue\u0028\u0029",
+            "name": "extractArrayValue",
+            "summary": "extended\u0020function\u0020\u0060getArrayValue\u0060\u003A\u0020will\u0020remove\u0020value\u0020\u0028and\u0020key\u0029\u0020from\u0020array\nif\u0020found",
+            "url": "namespaces/macwinnie-phphelpers.html#function_extractArrayValue"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\rmValueByKeyTree\u0028\u0029",
+            "name": "rmValueByKeyTree",
+            "summary": "function\u0020to\u0020remove\u0020a\u0020value\u0020specified\u0020by\u0020the\u0020key\u002Dtree\u0020from\u0020an\u0020array",
+            "url": "namespaces/macwinnie-phphelpers.html#function_rmValueByKeyTree"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
