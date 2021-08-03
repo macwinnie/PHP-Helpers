@@ -49,10 +49,24 @@ To create the latest documentation, simply run the following Docker command:
 ```sh
 docker pull phpdoc/phpdoc:3
 rm -rf docs
-docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --setting=graphs.enabled=true -d src -t docs
+docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --setting=graphs.enabled=true -d src -t docs --sourcecode --title=PHP-Helpers --no-interaction
+cat <<EOF >> docs/css/base.css
+
+code.prettyprint {
+    background: var(--code-background-color);
+    border: 1px solid var(--code-border-color);
+    border-radius: var(--border-radius-base-size);
+    padding: 0.1em 0.4em;
+    margin: 0.1em 0.2em;
+}
+EOF
 ```
 
 *ATTENTION:* The phpDocumentor tag `latest` from Docker is somehow a very old one – one wants to use a version tag like the `:3` above.
+
+## last dependency update and test
+
+0000-00-00 00:00:00
 
 ## Licence
 

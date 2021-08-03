@@ -68,6 +68,9 @@ jobs:
         with:
           version: ${{ steps.previoustag.outputs.tag }}
 
+      - name: Last Build
+        run: sed -i -E "s/^[0-9]{4}-[0-9]{2}-[0-9]{2}\s+[0-9]{2}:[0-9]{2}:[0-9]{2}$/$( date +"%Y-%m-%d %T" )/" README.md
+
       - uses: stefanzweifel/git-auto-commit-action@v4
         if: ${{ steps.gitcheck.outputs.push == 'push' }}
         with:
