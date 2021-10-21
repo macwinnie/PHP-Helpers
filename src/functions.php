@@ -263,3 +263,48 @@ function rmValueByKeyTree ( &$array, $keytree = [] ) {
         unset( $array[ $key ] );
     }
 }
+
+/**
+ * function to generate a random string of a given length
+ *
+ * @param  integer $length    length, the string should have
+ * @param  mixed   $alphabets default is `NULL`, so the random string will
+ *                            consist out of `0-9a-f`; if of `String` type,
+ *                            the random string will be generated out of all
+ *                            characters of that string; if it is a List /
+ *                            Array of strings, the randomized string will –
+ *                            as length is at least as high as the count of
+ *                            given alphabents – contain at least one char
+ *                            out of all those alphabets.
+ *
+ * @return string             random string
+ */
+function randomString( $length = 16, $alphabets = NULL ) {
+    if ( $alphabets == NULL ) {
+        if ( function_exists('random_bytes') ) {
+            $bytes = random_bytes( $length / 2 );
+        }
+        else {
+            $bytes = openssl_random_pseudo_bytes( $length / 2 );
+        }
+        $result = bin2hex( $bytes );
+    }
+    else {
+        if ( ! is_array( $alphabets ) ) {
+            $alphabets = [ $alphabets ];
+        }
+        $counts = count( $alphabets );
+        $result = '';
+        $used   = [];
+        while ( strlen( $result ) < $length ) {
+            // fetch the alphabet
+            do {
+                $i = random_int( 0, $counts - 1 );
+            } while ( in_array( $i, $used ) );
+            $len = strlen( $alphabets[ $i ] );
+            $j = random_int( 0, $len - 1 );
+            $result .= $alphabets[ $i ][ $j ];
+        }
+    }
+    return $result;
+}

@@ -19,6 +19,7 @@ default: &default
       contexts:
         - "macwinnie\\PHPHelpersTests\\RegExContext"
         - "macwinnie\\PHPHelpersTests\\ArrayContext"
+        - "macwinnie\\PHPHelpersTests\\StringContext"
 
 
   formatters:
