@@ -10,6 +10,9 @@
             "email": "dev@macwinnie.me"
         }
     ],
+    "require": {
+        "vlucas/phpdotenv": "^5.3"
+    },
     "require-dev": {
         "behat/behat": ">=3.8",
         "phpunit/phpunit": ">=9.5"
@@ -17,7 +20,10 @@
     "autoload": {
         "files": [
             "src/functions.php"
-        ]
+        ],
+        "psr-4": {
+            "macwinnie\\PHPHelpers\\": "src/classes/"
+        }
     },
     "autoload-dev": {
         "psr-4" : {

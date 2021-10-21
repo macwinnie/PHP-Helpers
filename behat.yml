@@ -18,6 +18,7 @@ default: &default
 
       contexts:
         - "macwinnie\\PHPHelpersTests\\ArrayContext"
+        - "macwinnie\\PHPHelpersTests\\LoggerContext"
         - "macwinnie\\PHPHelpersTests\\RegExContext"
         - "macwinnie\\PHPHelpersTests\\StringContext"
 
