@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is a helper file for helper functions used for coding with RegExes.
+ * This file is a helper file for helper functions within PHP.
  *
  * It is published unter CC BY-SA 4.0 license.
  *

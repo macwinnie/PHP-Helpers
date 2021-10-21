@@ -24,7 +24,7 @@ class StringContext implements Context {
     /**
      * @BeforeScenario
      */
-    // prepare for feature execution
+    // prepare for scenario execution
     public static function prepareForTheScenario() {
         static::$rnd_randoms   = [];
         static::$rnd_curLen    = 16;

@@ -17,13 +17,11 @@ default: &default
         - "%paths.base%/tests/features"
 
       contexts:
-        - "macwinnie\\PHPHelpersTests\\RegExContext"
         - "macwinnie\\PHPHelpersTests\\ArrayContext"
+        - "macwinnie\\PHPHelpersTests\\RegExContext"
         - "macwinnie\\PHPHelpersTests\\StringContext"
 
-
   formatters:
-
     pretty: true
 
 # Same as default – but now execute only scenarios with @skip tag
