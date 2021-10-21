@@ -2,8 +2,6 @@
 
 namespace macwinnie\PHPHelpersTests;
 
-use macwinnie\PHPHelpers as rf;
-
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -27,7 +25,6 @@ class RegExContext implements Context {
      * @When running the :fkt function
      */
     public function runningTheFunction( $fkt ) {
-        $fkt = '\\macwinnie\\PHPHelpers\\' . $fkt;
         if ( is_array( $this->results[ 'fkt_input' ] ) ) {
             $this->results[ 'fkt_result' ] = call_user_func_array( $fkt, $this->results[ 'fkt_input' ] );
         }

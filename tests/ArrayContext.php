@@ -2,8 +2,6 @@
 
 namespace macwinnie\PHPHelpersTests;
 
-use macwinnie\PHPHelpers as rf;
-
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -45,14 +43,14 @@ class ArrayContext implements Context {
      * @When I search for the key-tree :key
      */
     public function iSearchForTheKeyTree( $keytree ) {
-        static::$foundValue = rf\getArrayValue( static::$inspectedArray, $keytree );
+        static::$foundValue = getArrayValue( static::$inspectedArray, $keytree );
     }
 
     /**
      * @When I search for the key-tree :keytree with default :default
      */
     public function iSearchForTheKeyTreeWithDefault( $keytree, $default ) {
-        static::$foundValue = rf\getArrayValue( static::$inspectedArray, $keytree, $default );
+        static::$foundValue = getArrayValue( static::$inspectedArray, $keytree, $default );
     }
 
     /**
@@ -66,7 +64,7 @@ class ArrayContext implements Context {
      * @When I extract – search and remove – the key-tree :keytree
      */
     public function iExtractSearchAndRemoveTheKeyTree( $keytree ) {
-        static::$foundValue = rf\extractArrayValue( static::$inspectedArray, $keytree );
+        static::$foundValue = extractArrayValue( static::$inspectedArray, $keytree );
     }
 
     /**

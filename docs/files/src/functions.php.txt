@@ -340,6 +340,7 @@ if ( ! function_exists( 'env' ) ) {
                 return;
         }
 
+
         $regex = '/^(\s*["\'])?(.*?)(["\']\s*)?$/x';
         preg_match( $regex, $value, $matches );
         if (

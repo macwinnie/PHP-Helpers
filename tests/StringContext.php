@@ -2,8 +2,6 @@
 
 namespace macwinnie\PHPHelpersTests;
 
-use macwinnie\PHPHelpers as rf;
-
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
@@ -38,7 +36,7 @@ class StringContext implements Context {
      */
     private function generateRandom() {
         $l1 = count( static::$rnd_randoms );
-        $string = rf\randomString( static::$rnd_curLen, static::$rnd_alphabets );
+        $string = randomString( static::$rnd_curLen, static::$rnd_alphabets );
         Assert::assertEquals( static::$rnd_curLen, strlen( $string ) );
         static::$rnd_randoms[] = $string;
         $l2 = count( static::$rnd_randoms );

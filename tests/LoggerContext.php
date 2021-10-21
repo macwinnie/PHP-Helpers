@@ -2,8 +2,7 @@
 
 namespace macwinnie\PHPHelpersTests;
 
-use macwinnie\PHPHelpers as rf;
-use rf\Logger;
+use macwinnie\PHPHelpers\Logger;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
