@@ -17,6 +17,7 @@ default: &default
         - "%paths.base%/tests/features"
 
       contexts:
+        - "macwinnie\\PHPHelpersTests\\AnyContext"
         - "macwinnie\\PHPHelpersTests\\ArrayContext"
         - "macwinnie\\PHPHelpersTests\\LoggerContext"
         - "macwinnie\\PHPHelpersTests\\RegExContext"
