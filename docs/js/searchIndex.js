@@ -3,8 +3,68 @@ Search.appendIndex(
                 {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger",
             "name": "Logger",
-            "summary": "",
+            "summary": "Logger\u0020class\u0020that\u0020handles\u0020writing\u0020out\u0020logfiles\u0020for\u0020PHP\u0020programs.",
             "url": "classes/macwinnie-PHPHelpers-Logger.html"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "initialize\u0020the\u0020logger",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___construct"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "create\u0020string\u0020representation\u0020of\u0020current\u0020log\u0020entry",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___toString"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "function\u0020that\u0020handles\u0020loglevel\u0020method\u0020calls\u0020to\u0020this\u0020static\u0020class\u0020and\nreturns\u0020an\u0020\u0060\\Exception\u0060\u0020on\u0020all\u0020unkown\u0020static\u0020method\u0020calls\u0020on\u0020this\u0020class",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___callStatic"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003Aget_calling_class\u0028\u0029",
+            "name": "get_calling_class",
+            "summary": "get\u0020the\u0020name\u0020of\u0020the\u0020calling\u0020class\u0020for\u0020logging",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_get_calling_class"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024availableLoglevels",
+            "name": "availableLoglevels",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_availableLoglevels"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024localDefaults",
+            "name": "localDefaults",
+            "summary": "this\u0020class\u0020is\u0020relies\u0020on\u0020environmental\u0020variables\u003A",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_localDefaults"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024envs",
+            "name": "envs",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_envs"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024time",
+            "name": "time",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_time"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024lvl",
+            "name": "lvl",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_lvl"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024msg",
+            "name": "msg",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_msg"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024clss",
+            "name": "clss",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_clss"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024spec",
+            "name": "spec",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_spec"
         },                {
             "fqsen": "\\REGEX_DELIMITER",
             "name": "REGEX_DELIMITER",
@@ -50,6 +110,11 @@ Search.appendIndex(
             "name": "env",
             "summary": "Gets\u0020the\u0020value\u0020of\u0020an\u0020environment\u0020variable.\u0020Supports\u0020boolean,\u0020empty\u0020and\u0020null.",
             "url": "namespaces/default.html#function_env"
+        },                {
+            "fqsen": "\\rm_recursive\u0028\u0029",
+            "name": "rm_recursive",
+            "summary": "Remove\u0020a\u0020directory\u0020and\u0020all\u0020its\u0020content",
+            "url": "namespaces/default.html#function_rm_recursive"
         },                {
             "fqsen": "\\",
             "name": "\\",

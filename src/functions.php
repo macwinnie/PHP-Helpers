@@ -313,6 +313,7 @@ if ( ! function_exists( 'env' ) ) {
      *
      * @param  string  $key
      * @param  mixed   $default
+     *
      * @return mixed
      */
     function env ( $key, $default = NULL ) {
@@ -362,20 +363,24 @@ if ( ! function_exists( 'env' ) ) {
 /**
  * Remove a directory and all its content
  *
- * @param string $path directory path
+ * @param  string  $path directory path
+ *
+ * @return boolean       `true` on success, `false` on error
  */
-function rm_recursive($path) {
+function rm_recursive( $path ) {
     // we don't want to reflect the current path '.' or its parent '..'
     $cleanse = [ '.', '..' ];
-    $files = array_diff( scandir( $path ), $cleanse );
-    foreach ( $files as $file ) {
-        $newPath = implode( DIRECTORY_SEPARATOR, [ $path, $file ] );
-        if ( is_dir( $newPath ) ) {
-            rm_recursive( $newPath );
+    if ( is_dir( $path ) ) {
+        $files = array_diff( scandir( $path ), $cleanse );
+        foreach ( $files as $file ) {
+            $newPath = implode( DIRECTORY_SEPARATOR, [ $path, $file ] );
+            if ( is_dir( $newPath ) ) {
+                rm_recursive( $newPath );
+            }
+            else {
+                unlink( $newPath );
+            }
         }
-        else {
-            unlink( $newPath );
-        }
+        return rmdir( $path );
     }
-    return rmdir( $path );
 }

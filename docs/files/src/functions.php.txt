@@ -313,12 +313,18 @@ if ( ! function_exists( 'env' ) ) {
      *
      * @param  string  $key
      * @param  mixed   $default
+     *
      * @return mixed
      */
-    function env ( $key, $default = null ) {
-        $value = $_ENV[ $key ];
+    function env ( $key, $default = NULL ) {
 
-        if ($value === null) {
+        try {
+            $value = $_ENV[ $key ];
+        } catch ( \Exception $e ) {
+            $value = NULL;
+        }
+
+        if ($value === NULL) {
             return $default;
         }
         switch (strtolower($value)) {
@@ -340,11 +346,11 @@ if ( ! function_exists( 'env' ) ) {
                 return;
         }
 
-
         $regex = '/^(\s*["\'])?(.*?)(["\']\s*)?$/x';
         preg_match( $regex, $value, $matches );
         if (
             $value == $matches[0] and
+            isset( $matches[3] ) and
             trim( $matches[1] ) == trim( $matches[3] )
         ) {
             $value = $matches[2];
@@ -352,4 +358,27 @@ if ( ! function_exists( 'env' ) ) {
 
         return $value;
     }
+}
+
+/**
+ * Remove a directory and all its content
+ *
+ * @param  string  $path directory path
+ *
+ * @return boolean       `true` on success, `false` on error
+ */
+function rm_recursive($path) {
+    // we don't want to reflect the current path '.' or its parent '..'
+    $cleanse = [ '.', '..' ];
+    $files = array_diff( scandir( $path ), $cleanse );
+    foreach ( $files as $file ) {
+        $newPath = implode( DIRECTORY_SEPARATOR, [ $path, $file ] );
+        if ( is_dir( $newPath ) ) {
+            rm_recursive( $newPath );
+        }
+        else {
+            unlink( $newPath );
+        }
+    }
+    return rmdir( $path );
 }
