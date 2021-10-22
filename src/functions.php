@@ -315,10 +315,15 @@ if ( ! function_exists( 'env' ) ) {
      * @param  mixed   $default
      * @return mixed
      */
-    function env ( $key, $default = null ) {
-        $value = $_ENV[ $key ];
+    function env ( $key, $default = NULL ) {
 
-        if ($value === null) {
+        try {
+            $value = $_ENV[ $key ];
+        } catch ( \Exception $e ) {
+            $value = NULL;
+        }
+
+        if ($value === NULL) {
             return $default;
         }
         switch (strtolower($value)) {
@@ -344,6 +349,7 @@ if ( ! function_exists( 'env' ) ) {
         preg_match( $regex, $value, $matches );
         if (
             $value == $matches[0] and
+            isset( $matches[3] ) and
             trim( $matches[1] ) == trim( $matches[3] )
         ) {
             $value = $matches[2];
