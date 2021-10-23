@@ -327,24 +327,7 @@ if ( ! function_exists( 'env' ) ) {
         if ($value === NULL) {
             return $default;
         }
-        switch (strtolower($value)) {
-            case 'yes':
-            case '(yes)':
-            case 'true':
-            case '(true)':
-                return true;
-            case 'no':
-            case '(no)':
-            case 'false':
-            case '(false)':
-                return false;
-            case 'empty':
-            case '(empty)':
-                return '';
-            case 'null':
-            case '(null)':
-                return;
-        }
+        $value = val2boolEmptyNull( $value );
 
         $regex = '/^(\s*["\'])?(.*?)(["\']\s*)?$/x';
         preg_match( $regex, $value, $matches );
@@ -361,24 +344,57 @@ if ( ! function_exists( 'env' ) ) {
 }
 
 /**
+ * helper function for env function to translate (string) values
+ * into boolean values, empty string or null
+ *
+ * @param  string $value value to be transformed
+ *
+ * @return mixed         transformed value
+ */
+function val2boolEmptyNull ( $value ) {
+    switch (strtolower($value)) {
+        case 'yes':
+        case '(yes)':
+        case 'true':
+        case '(true)':
+            return true;
+        case 'no':
+        case '(no)':
+        case 'false':
+        case '(false)':
+            return false;
+        case 'empty':
+        case '(empty)':
+            return '';
+        case 'null':
+        case '(null)':
+            return;
+        default:
+            return $value;
+    }
+}
+
+/**
  * Remove a directory and all its content
  *
  * @param  string  $path directory path
  *
  * @return boolean       `true` on success, `false` on error
  */
-function rm_recursive($path) {
+function rm_recursive( $path ) {
     // we don't want to reflect the current path '.' or its parent '..'
     $cleanse = [ '.', '..' ];
-    $files = array_diff( scandir( $path ), $cleanse );
-    foreach ( $files as $file ) {
-        $newPath = implode( DIRECTORY_SEPARATOR, [ $path, $file ] );
-        if ( is_dir( $newPath ) ) {
-            rm_recursive( $newPath );
+    if ( is_dir( $path ) ) {
+        $files = array_diff( scandir( $path ), $cleanse );
+        foreach ( $files as $file ) {
+            $newPath = implode( DIRECTORY_SEPARATOR, [ $path, $file ] );
+            if ( is_dir( $newPath ) ) {
+                rm_recursive( $newPath );
+            }
+            else {
+                unlink( $newPath );
+            }
         }
-        else {
-            unlink( $newPath );
-        }
+        return rmdir( $path );
     }
-    return rmdir( $path );
 }

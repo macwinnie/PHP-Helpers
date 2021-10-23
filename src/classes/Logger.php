@@ -29,16 +29,20 @@ use DateTime, DateTimeZone;
  */
 class Logger {
 
+    static private $filenames = [
+        'full' => 'full.log',
+    ];
+
     static protected $availableLoglevels = [
-         'DEBUG',
-         'INFO',
-         'NOTICE',
-         'WARNING',
-         'ERROR',
-         'CRITICAL',
-         'ALERT',
-         'EMERGENCY',
-         'RETURN',
+        'DEBUG',
+        'INFO',
+        'NOTICE',
+        'WARNING',
+        'ERROR',
+        'CRITICAL',
+        'ALERT',
+        'EMERGENCY',
+        'RETURN',
     ];
 
     /**
@@ -156,5 +160,34 @@ class Logger {
                 return $entry[ 'class' ];
             }
         }
+    }
+
+    /**
+     * get filename for logfiles
+     *
+     * @param  string $file logfile
+     *
+     * @return string       filename for logfile
+     *
+     * @throws \Exception   if the requested logfile type does not exist
+     */
+    public static function getFilename ( $file ) {
+        if ( ! isset( static::$filenames[ $file ] ) ) {
+            throw new \Exception( "The requested file does not exist." );
+        }
+        return static::$filenames[ $file ];
+    }
+
+    /**
+     * Ensure that the log path does exist
+     *
+     * @return boolean Returns `true` on success or `false` on failure.
+     */
+    public static function ensureLogPathExists () {
+        $success = true;
+        if ( ! is_dir( env( 'LOG_PATH' ) ) ) {
+            $success = mkdir( env( 'LOG_PATH' ), 0700, true );
+        }
+        return $success;
     }
 }

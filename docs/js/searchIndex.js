@@ -26,6 +26,21 @@ Search.appendIndex(
             "summary": "get\u0020the\u0020name\u0020of\u0020the\u0020calling\u0020class\u0020for\u0020logging",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#method_get_calling_class"
         },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AgetFilename\u0028\u0029",
+            "name": "getFilename",
+            "summary": "get\u0020filename\u0020for\u0020logfiles",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_getFilename"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AensureLogPathExists\u0028\u0029",
+            "name": "ensureLogPathExists",
+            "summary": "Ensure\u0020that\u0020the\u0020log\u0020path\u0020does\u0020exist",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_ensureLogPathExists"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024filenames",
+            "name": "filenames",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_filenames"
+        },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024availableLoglevels",
             "name": "availableLoglevels",
             "summary": "",
@@ -110,6 +125,11 @@ Search.appendIndex(
             "name": "env",
             "summary": "Gets\u0020the\u0020value\u0020of\u0020an\u0020environment\u0020variable.\u0020Supports\u0020boolean,\u0020empty\u0020and\u0020null.",
             "url": "namespaces/default.html#function_env"
+        },                {
+            "fqsen": "\\val2boolEmptyNull\u0028\u0029",
+            "name": "val2boolEmptyNull",
+            "summary": "helper\u0020function\u0020for\u0020env\u0020function\u0020to\u0020translate\u0020\u0028string\u0029\u0020values\ninto\u0020boolean\u0020values,\u0020empty\u0020string\u0020or\u0020null",
+            "url": "namespaces/default.html#function_val2boolEmptyNull"
         },                {
             "fqsen": "\\rm_recursive\u0028\u0029",
             "name": "rm_recursive",

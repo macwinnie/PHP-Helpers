@@ -36,8 +36,8 @@ class LoggerContext implements Context {
      */
     // clean up scenario execution
     public static function cleanupScenario( AfterScenarioScope $scope ) {
-        // to run only when any.feature is run ...
-        if ( strpos( $scope->getFeature()->getFile(), 'any.feature' ) !== false ) {
+        // to run only when logger.feature is run ...
+        if ( strpos( $scope->getFeature()->getFile(), 'logger.feature' ) !== false ) {
             if ( env( 'LOG_PATH' ) != NULL ) {
                 $path_segments = explode( DIRECTORY_SEPARATOR, env( 'LOG_PATH' ) );
                 $del_path = '';
@@ -79,34 +79,6 @@ class LoggerContext implements Context {
     }
 
     /**
-     * @Given the env variable :name with value :value
-     */
-    public function theEnvVariableWithValue($name, $value) {
-        putenv( sprintf( '%s="%s"', $name, $value ) );
-        $_ENV[ $name ] = $value;
-        $_SERVER[ $name ] = $value;
-        switch (strtolower($value)) {
-            case 'yes':
-            case '(yes)':
-            case 'true':
-            case '(true)':
-                $value = true;
-            case 'no':
-            case '(no)':
-            case 'false':
-            case '(false)':
-                $value = false;
-            case 'empty':
-            case '(empty)':
-                $value = '';
-            case 'null':
-            case '(null)':
-                $value = NULL;
-        }
-        Assert::assertEquals( $value, env( $name ) );
-    }
-
-    /**
      * @Then the message matches the regex :regex
      */
     public function theMessageMatchesTheRegex( $regex ) {
@@ -122,13 +94,11 @@ class LoggerContext implements Context {
     }
 
     /**
-     * @Given the logging dir :path
+     * @Given the logging path :path
      */
-    public function theLoggingDir( $path ) {
-        $this->theEnvVariableWithValue( 'LOG_PATH', $path );
-        if ( ! is_dir( env( 'LOG_PATH' ) ) ) {
-            mkdir( env( 'LOG_PATH' ), 0700, true );
-        }
+    public function theLoggingPath( $path ) {
+        AnyContext::setEnvValue( 'LOG_PATH', $path );
+        Assert::assertTrue( Logger::ensureLogPathExists() );
         Assert::assertTrue( is_dir( env( 'LOG_PATH' ) ) );
     }
 
@@ -136,7 +106,7 @@ class LoggerContext implements Context {
      * @Then the global logfile should contain an entry with that message
      */
     public function theGlobalLogfileShouldContainAnEntryWithThatMessage() {
-        throw new PendingException();
+        Assert::assertTrue( is_file( implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( 'full' ) ] ) ) );
     }
 
     /**

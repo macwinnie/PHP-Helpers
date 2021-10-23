@@ -18,7 +18,7 @@ Feature: Test the logger
 
   @logger
   Scenario: Writing a log message
-    Given the logging dir "tmp/logging"
+    Given the logging path "tmp/logging"
     And the env variable "LOGLEVEL" with value "debug"
     When I log the message "lorem ipsum" with level "error"
     Then the global logfile should contain an entry with that message

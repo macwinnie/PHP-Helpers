@@ -327,24 +327,7 @@ if ( ! function_exists( 'env' ) ) {
         if ($value === NULL) {
             return $default;
         }
-        switch (strtolower($value)) {
-            case 'yes':
-            case '(yes)':
-            case 'true':
-            case '(true)':
-                return true;
-            case 'no':
-            case '(no)':
-            case 'false':
-            case '(false)':
-                return false;
-            case 'empty':
-            case '(empty)':
-                return '';
-            case 'null':
-            case '(null)':
-                return;
-        }
+        $value = val2boolEmptyNull( $value );
 
         $regex = '/^(\s*["\'])?(.*?)(["\']\s*)?$/x';
         preg_match( $regex, $value, $matches );
@@ -357,6 +340,37 @@ if ( ! function_exists( 'env' ) ) {
         }
 
         return $value;
+    }
+}
+
+/**
+ * helper function for env function to translate (string) values
+ * into boolean values, empty string or null
+ *
+ * @param  string $value value to be transformed
+ *
+ * @return mixed         transformed value
+ */
+function val2boolEmptyNull ( $value ) {
+    switch (strtolower($value)) {
+        case 'yes':
+        case '(yes)':
+        case 'true':
+        case '(true)':
+            return true;
+        case 'no':
+        case '(no)':
+        case 'false':
+        case '(false)':
+            return false;
+        case 'empty':
+        case '(empty)':
+            return '';
+        case 'null':
+        case '(null)':
+            return;
+        default:
+            return $value;
     }
 }
 

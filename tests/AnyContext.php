@@ -8,11 +8,25 @@ use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 /**
  * Defines application features from the specific context.
  */
 class AnyContext implements Context {
+
+    private static $envTest = [];
+
+    /**
+     * @BeforeScenario
+     */
+    // prepare for scenario execution
+    public static function prepareForTheScenario( BeforeScenarioScope $scope ) {
+        // only run on env.feature
+        if ( strpos( $scope->getFeature()->getFile(), 'env.feature' ) !== false ) {
+            static::$envTest = [];
+        }
+    }
 
     /**
      * @Given the existing empty directory :path
@@ -57,5 +71,80 @@ class AnyContext implements Context {
         Assert::assertTrue( is_dir( $path ) );
         rm_recursive( $path );
         Assert::assertFalse( is_dir( $path ) );
+    }
+
+    /**
+     * @Given the env variable :name with value :value
+     */
+    public function theEnvVariableWithValue( $name, $value ) {
+        static::setEnvValue( $name, $value );
+    }
+
+    /**
+     * helper function to set an env value
+     *
+     * @param string $name  env name to be filled by value
+     * @param string $value value to set
+     */
+    public static function setEnvValue( $name, $value ) {
+        putenv( sprintf( '%s="%s"', $name, $value ) );
+        $_ENV[ $name ] = $value;
+        $_SERVER[ $name ] = $value;
+    }
+
+    /**
+     * @Given the string - expected set
+     */
+    public function theStringExpectedSet( TableNode $table ) {
+        static::$envTest = $table->getHash();
+    }
+
+    /**
+     * helper function to check test results against true, false and NULL
+     *
+     * @param  string &$val given expected value
+     *
+     * @return mixed        actual expected value
+     */
+    private static function checkSpecial ( &$val ) {
+        switch ( strtoupper( $val ) ) {
+            case 'TRUE':
+                $val = true;
+                break;
+            case 'FALSE':
+                $val = false;
+                break;
+            case 'NULL':
+                $val = NULL;
+                break;
+        }
+    }
+
+    /**
+     * @Then transforming with val2boolEmptyNull returns the expected
+     */
+    public function transformingWithValboolemptynullReturnsTheExpected() {
+        foreach ( static::$envTest as $test ) {
+            static::checkSpecial( $test[ 'expected' ]);
+            Assert::assertSame( $test[ 'expected' ], val2boolEmptyNull( $test[ 'string' ] ) );
+        }
+    }
+
+    /**
+     * @Given the env - value - expected set
+     */
+    public function theEnvValueExpectedSet( TableNode $table ) {
+        static::$envTest = $table->getHash();
+    }
+
+    /**
+     * @Then setting env and receiving the value matches the expected
+     */
+    public function settingEnvAndReceivingTheValueMatchesTheExpected() {
+        foreach ( static::$envTest as $test ) {
+            $this->theEnvVariableWithValue( $test[ 'env' ], $test[ 'val' ] );
+            static::checkSpecial( $test[ 'expected' ]);
+            Assert::assertSame( $test[ 'expected' ], env( $test[ 'env' ] ) );
+        }
     }
 }
