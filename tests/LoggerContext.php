@@ -11,6 +11,7 @@ use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 /**
  * Defines application features from the specific context.
@@ -23,37 +24,46 @@ class LoggerContext implements Context {
      * @BeforeScenario
      */
     // prepare for scenario execution
-    public static function prepareForTheScenario() {
-        static::$logged = [];
+    public static function prepareForTheScenario( BeforeScenarioScope $scope ) {
+        // only run on logger.feature
+        if ( strpos( $scope->getFeature()->getFile(), 'logger.feature' ) !== false ) {
+            static::$logged = [];
+        }
     }
 
     /**
      * @AfterScenario
      */
     // clean up scenario execution
-    public static function cleanupScenario() {
-        if ( env( 'LOG_PATH' ) != NULL ) {
-            $path_segments = explode( DIRECTORY_SEPARATOR, env( 'LOG_PATH' ) );
-            $del_path = '';
-            $checked = [];
-            foreach ( $path_segments as $i => $seg ) {
-                // we don't want to reflect the current path '.' or its parent '..'
-                $cleanse = [ '.', '..' ];
-                // we don't want to reflect the child, that will be checked next
-                if ( isset( $path_segments[ $i + 1 ] ) ) {
-                    $cleanse[] = $path_segments[ $i + 1 ];
-                }
-                // let's work with the $checked variable as path segments
-                // already checked after this step
-                $checked[] = $seg;
-                $path = implode( DIRECTORY_SEPARATOR, $checked );
-                // let's find the siblings of the path reflected next
-                $sibs  = array_diff( scandir( $path ), $cleanse );
-                if ( count( $sibs ) == 0 ) {
-                    // delete the current path
-                    rm_recursive( $path );
-                    // we don't need to check further
-                    break;
+    public static function cleanupScenario( AfterScenarioScope $scope ) {
+        // to run only when any.feature is run ...
+        if ( strpos( $scope->getFeature()->getFile(), 'any.feature' ) !== false ) {
+            if ( env( 'LOG_PATH' ) != NULL ) {
+                $path_segments = explode( DIRECTORY_SEPARATOR, env( 'LOG_PATH' ) );
+                $del_path = '';
+                $checked = [];
+                foreach ( $path_segments as $i => $seg ) {
+                    // we don't want to reflect the current path '.' or its parent '..'
+                    $cleanse = [ '.', '..' ];
+                    // we don't want to reflect the child, that will be checked next
+                    if ( isset( $path_segments[ $i + 1 ] ) ) {
+                        $cleanse[] = $path_segments[ $i + 1 ];
+                    }
+                    // let's work with the $checked variable as path segments
+                    // already checked after this step
+                    $checked[] = $seg;
+                    $path = implode( DIRECTORY_SEPARATOR, $checked );
+                    // let's find the siblings of the path reflected next
+                    $sibs = [];
+                    if ( is_dir( $path ) ) {
+                        $sibs = array_diff( scandir( $path ), $cleanse );
+                    }
+                    if ( count( $sibs ) == 0 ) {
+                        // delete the current path
+                        rm_recursive( $path );
+                        // we don't need to check further
+                        break;
+                    }
                 }
             }
         }

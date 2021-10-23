@@ -59,7 +59,10 @@ class RegExContext implements Context {
      * @AfterScenario
      */
     public function cleanup ( AfterScenarioScope $scope ) {
-        $this->results = [];
+        // only run on getRegexOccurences.feature
+        if ( strpos( $scope->getFeature()->getFile(), 'getRegexOccurences.feature' ) !== false ) {
+            $this->results = [];
+        }
     }
 
     /**

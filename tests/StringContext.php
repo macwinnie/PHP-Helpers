@@ -8,7 +8,7 @@ use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Behat\Hook\Scope\AfterScenarioScope;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 /**
  * Defines application features from the specific context.
@@ -23,10 +23,13 @@ class StringContext implements Context {
      * @BeforeScenario
      */
     // prepare for scenario execution
-    public static function prepareForTheScenario() {
-        static::$rnd_randoms   = [];
-        static::$rnd_curLen    = 16;
-        static::$rnd_alphabets = NULL;
+    public static function prepareForTheScenario( BeforeScenarioScope $scope ) {
+        // only to run on randomStrings.feature
+        if ( strpos( $scope->getFeature()->getFile(), 'randomStrings.feature' ) !== false ) {
+            static::$rnd_randoms   = [];
+            static::$rnd_curLen    = 16;
+            static::$rnd_alphabets = NULL;
+        }
     }
 
     /**
