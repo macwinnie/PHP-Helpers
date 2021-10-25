@@ -75,7 +75,7 @@ class LoggerContext implements Context {
     public function iLogTheMessageWithLevel($msg, $lvl) {
         static::$logged[ 'message' ] = $msg;
         static::$logged[ 'level' ]   = $lvl;
-        static::$logged[ 'return' ]  = Logger::$lvl( $msg );
+        static::$logged[ 'return' ]  = Logger::$lvl( $msg, true );
     }
 
     /**
@@ -99,20 +99,46 @@ class LoggerContext implements Context {
     public function theLoggingPath( $path ) {
         AnyContext::setEnvValue( 'LOG_PATH', $path );
         Assert::assertTrue( Logger::ensureLogPathExists() );
-        Assert::assertTrue( is_dir( env( 'LOG_PATH' ) ) );
+        Assert::assertDirectoryExists( env( 'LOG_PATH' ) );
     }
 
     /**
      * @Then the global logfile should contain an entry with that message
      */
     public function theGlobalLogfileShouldContainAnEntryWithThatMessage() {
-        Assert::assertTrue( is_file( implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( 'full' ) ] ) ) );
+        $filename = implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( 'full' ) ] );
+        Assert::assertFileExists( $filename );
+        $log_lines = array_filter( array_map( 'trim', explode( "\n", file_get_contents( $filename ) ) ) );
+        Assert::assertContains( static::$logged[ 'return' ], $log_lines );
     }
 
     /**
      * @Then the loglevel logfile should contain an entry with that message
      */
     public function theLoglevelLogfileShouldContainAnEntryWithThatMessage() {
-        throw new PendingException();
+        $filename = implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( static::$logged[ 'level' ] ) ] );
+        Assert::assertFileExists( $filename );
+        $log_lines = array_filter( array_map( 'trim', explode( "\n", file_get_contents( $filename ) ) ) );
+        $pattern = format2regex( Logger::getLogStringFormat( false ), '(.*?)', true );
+        $format  = Logger::getLogStringFormat( true );
+        preg_match( $pattern, static::$logged['return'], $matches);
+        unset($matches[0]);
+        Assert::assertContains( vsprintf( $format, $matches ), $log_lines );
+    }
+
+    /**
+     * @Then the global logfile does not exist
+     */
+    public function theGlobalLogfileDoesNotExist() {
+        $filename = implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( 'full' ) ] );
+        Assert::assertFileNotExists( $filename );
+    }
+
+    /**
+     * @Then the loglevel logfile does not exist
+     */
+    public function theLoglevelLogfileDoesNotExist() {
+        $filename = implode( DIRECTORY_SEPARATOR, [ env( 'LOG_PATH' ), Logger::getFilename( static::$logged[ 'level' ] ) ] );
+        Assert::assertFileNotExists( $filename );
     }
 }

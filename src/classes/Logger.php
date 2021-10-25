@@ -16,7 +16,6 @@ use DateTime, DateTimeZone;
  * * CRITICAL
  * * ALERT
  * * EMERGENCY
- * * RETURN (special one that returns the logmessage instead of writing it out to a file)
  *
  * A regular logging entry (in the combined logfile) has the format:
  * `Y-m-d H:i:s.u [loglevel] [class_calling] [length]: message`
@@ -26,13 +25,33 @@ use DateTime, DateTimeZone;
  * Within the loglevel specific files, the `[loglevel]` entry is removed.
  *
  * `[length]` represents the length of the logmessage `message` (in Bytes); date, time and the square braced parts are not reflected.
+ *
+ * Possible environmental variables – defaults are defined in `static::$localDefaults`:
+ * | environmental variable | description |
+ * | ---------------------- | ----------- |
+ * | `LOG_PATH`             | where should the log files be placed? Defaults to `/tmp/logs/` |
+ * | `LOG_LEVEL`            | one of the loglevels, defaults to `ERROR` |
+ * | `LOG_MICROSEC`         | should microseconds be reflected? Default is `true` |
+ * | `LOG_TIMEZONE`         | the timezone the logs should reflect, defaults to environmental variable `TIMEZONE` if it exists or `Europe/Berlin` |
+ * | `LOG_COMBINED`         | if `true`, additionally a `full.log` file will be created |
+ * | `LOG_ONLY_COMBINED`    | if `true` and `LOG_COMBINED` also `true`, only the `full.log` file is written out – else, there will also be `loglevel.log` files |
  */
 class Logger {
 
+    /**
+     * dictionary of additional filenames
+     *
+     * @var [string]
+     */
     static private $filenames = [
         'full' => 'full.log',
     ];
 
+    /**
+     * ordered (!) list of available LogLevels
+     *
+     * @var [string]
+     */
     static protected $availableLoglevels = [
         'DEBUG',
         'INFO',
@@ -42,38 +61,45 @@ class Logger {
         'CRITICAL',
         'ALERT',
         'EMERGENCY',
-        'RETURN',
     ];
 
     /**
-     * this class is relies on environmental variables:
+     * dictionary of defaults for used environmental variables
      *
-     * * `LOG_PATH` – where should the log files be placed? Defaults to `/tmp/logs/`
-     * * `LOG_LEVEL` – one of the loglevels, defaults to `ERROR`
-     * * `LOG_MICROSEC` – should microseconds be reflected? Default is `true`
-     * * `LOG_TIMEZONE` – the timezone the logs should reflect, defaults to environmental variable `TIMEZONE` if it exists or `Europe/Berlin`
+     * @var [mixed]
      */
     static protected $localDefaults = [
-        'LOG_PATH'     => '/tmp/logs/',
-        'LOG_LEVEL'    => 'error',
-        'LOG_MICROSEC' => true,
-        'LOG_TIMEZONE' => 'Europe/Berlin',
+        'LOG_PATH'          => '/tmp/logs/',
+        'LOG_LEVEL'         => 'error',
+        'LOG_MICROSEC'      => true,
+        'LOG_TIMEZONE'      => 'Europe/Berlin',
+        'LOG_COMBINED'      => true,
+        'LOG_ONLY_COMBINED' => true,
     ];
 
+    // working variables
     private $envs = [];
     private $time = NULL;
     private $lvl  = NULL;
     private $msg  = NULL;
     private $clss = NULL;
-    private $spec = true;
+    private $spec = false;
 
     /**
      * initialize the logger
      *
-     * @param string $loglevel loglevel out of static::$availableLoglevels
-     * @param string $message  the message to be logged
+     * @param  string $loglevel loglevel out of static::$availableLoglevels
+     * @param  string $message  the message to be logged
+     *
+     * @throws \Exception       thrown when loglevel does not exist
      */
     protected function __construct ( $loglevel, $message, $class ) {
+
+        $loglevel = strtoupper( $loglevel );
+        if ( ! in_array( $loglevel, static::$availableLoglevels ) ) {
+            throw new \Exception( sprintf( "The loglevel '%s' does not exist!", $loglevel ) );
+
+        }
 
         // fetch values of environmental functions
         foreach ( static::$localDefaults as $key => $default ) {
@@ -84,6 +110,7 @@ class Logger {
                 $this->envs[ $key ] = env( $key, $default );
             }
         }
+        $this->envs[ 'LOG_LEVEL' ] = strtoupper( $this->envs[ 'LOG_LEVEL' ] );
 
         // set all information
         if ( $this->envs[ 'LOG_MICROSEC' ] ) {
@@ -98,6 +125,52 @@ class Logger {
         $this->lvl  = $loglevel;
         $this->msg  = $message;
         $this->clss = $class;
+
+        $this->writeOut();
+    }
+
+    /**
+     * function that arranges the writeout to the logfile
+     *
+     * @return void
+     */
+    private function writeOut() {
+
+        $ell_key = array_search( $this->envs[ 'LOG_LEVEL' ], static::$availableLoglevels );
+        $rll_key = array_search( $this->lvl, static::$availableLoglevels );
+
+        static::ensureLogPathExists();
+
+        if ( $rll_key >= $ell_key ) {
+            if ( $this->envs[ 'LOG_COMBINED' ] ) {
+                $this->spec = false;
+                $this->appendToFile( static::getFilename( 'full' ), strval( $this ) );
+            }
+            if (
+                ! $this->envs[ 'LOG_COMBINED' ] or
+                ! $this->envs[ 'LOG_ONLY_COMBINED' ]
+            ) {
+                $this->spec = true;
+                $this->appendToFile( static::getFilename( $this->lvl ), strval( $this ) );
+            }
+            $this->spec = false;
+        }
+    }
+
+    /**
+     * function that performs the write out
+     *
+     * @param  string $name    filename
+     * @param  string $content content to append to the logfile
+     * @return mixed           Returns the same like `file_put_contents`:
+     *                         This function returns the number of bytes that were
+     *                         written to the file, or `false` on failure.
+     */
+    private function appendToFile( $name, $content ) {
+        $path = implode( DIRECTORY_SEPARATOR, [ $this->envs[ 'LOG_PATH' ], $name ] );
+        $file = fopen( $path, 'a' );
+        fwrite( $file, $content . "\n");
+        fclose( $file );
     }
 
     /**
@@ -107,15 +180,11 @@ class Logger {
      */
     public function __toString() {
 
-        $format = '%1$s';
-        if ( ! $this->spec or $this->lvl == 'RETURN' ) {
-            $format .= ' [%2$s]';
-        }
-        $format .= ' [%5$s] [%3$s]: %4$s';
+        $format = static::getLogStringFormat( $this->spec );
 
         $msgsize = strlen( $this->msg );
 
-        return sprintf( $format, $this->time, $this->lvl, $msgsize, $this->msg, $this->clss );
+        return sprintf( $format, $this->time, $this->lvl, $this->clss, $msgsize, $this->msg );
     }
 
     /**
@@ -123,7 +192,9 @@ class Logger {
      * returns an `\Exception` on all unkown static method calls on this class
      *
      * @param  string $name name of the unknown callable
-     * @param  mixed  $args arguments passed for the callable
+     * @param  mixed  $args arguments passed for the callable:
+     *                      # message
+     *                      # return – should the (loglevel) message be returned?
      *
      * @return mixed        result of the callable, if there is a matching loglevel
      *
@@ -133,12 +204,15 @@ class Logger {
         $name = strtoupper( $name );
         if ( in_array( $name, static::$availableLoglevels ) ) {
             $log = new static ( $name, $args[0], static::get_calling_class() );
-            if ( $name == 'RETURN' ) {
+            if (
+                isset( $args[1] ) and
+                $args[1] == true
+            ) {
                 return strval( $log );
             }
         }
         else {
-            throw new \Exception( sprintf( "Fatal: Call to undefined method %s:%s()", get_class( new static() ), $name ) );
+            throw new \Exception( sprintf( "Fatal: Call to undefined method %s:%s()", get_called_class(), $name ) );
         }
     }
 
@@ -172,10 +246,15 @@ class Logger {
      * @throws \Exception   if the requested logfile type does not exist
      */
     public static function getFilename ( $file ) {
-        if ( ! isset( static::$filenames[ $file ] ) ) {
+        if ( in_array( strtoupper( $file ), static::$availableLoglevels ) ) {
+            return sprintf( '%s.log', strtolower( $file ) );
+        }
+        elseif ( isset( static::$filenames[ $file ] ) ) {
+            return static::$filenames[ $file ];
+        }
+        else {
             throw new \Exception( "The requested file does not exist." );
         }
-        return static::$filenames[ $file ];
     }
 
     /**
@@ -185,9 +264,27 @@ class Logger {
      */
     public static function ensureLogPathExists () {
         $success = true;
-        if ( ! is_dir( env( 'LOG_PATH' ) ) ) {
-            $success = mkdir( env( 'LOG_PATH' ), 0700, true );
+        if ( ! is_dir( env( 'LOG_PATH', static::$localDefaults[ 'LOG_PATH' ] ) ) ) {
+            $success = mkdir( env( 'LOG_PATH', static::$localDefaults[ 'LOG_PATH' ] ), 0700, true );
         }
         return $success;
+    }
+
+    /**
+     * return the format string for a log message
+     *
+     * @param  boolean $logSpecific is the log message used in a specific loglevel context,
+     *                              e.g. the specific loglevel log file (`true`) or not, e.g.
+     *                              the global log file
+     *
+     * @return string               log message format
+     */
+    public static function getLogStringFormat ( $logSpecific = true ) {
+        $format = '%1$s';
+        if ( ! $logSpecific ) {
+            $format .= ' [%2$s]';
+        }
+        $format .= ' [%3$s] [%4$s]: %5$s';
+        return $format;
     }
 }

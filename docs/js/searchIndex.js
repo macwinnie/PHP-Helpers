@@ -11,6 +11,16 @@ Search.appendIndex(
             "summary": "initialize\u0020the\u0020logger",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#method___construct"
         },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AwriteOut\u0028\u0029",
+            "name": "writeOut",
+            "summary": "function\u0020that\u0020arranges\u0020the\u0020writeout\u0020to\u0020the\u0020logfile",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_writeOut"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AappendToFile\u0028\u0029",
+            "name": "appendToFile",
+            "summary": "function\u0020that\u0020performs\u0020the\u0020write\u0020out",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_appendToFile"
+        },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__toString\u0028\u0029",
             "name": "__toString",
             "summary": "create\u0020string\u0020representation\u0020of\u0020current\u0020log\u0020entry",
@@ -36,19 +46,24 @@ Search.appendIndex(
             "summary": "Ensure\u0020that\u0020the\u0020log\u0020path\u0020does\u0020exist",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#method_ensureLogPathExists"
         },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AgetLogStringFormat\u0028\u0029",
+            "name": "getLogStringFormat",
+            "summary": "return\u0020the\u0020format\u0020string\u0020for\u0020a\u0020log\u0020message",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_getLogStringFormat"
+        },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024filenames",
             "name": "filenames",
-            "summary": "",
+            "summary": "dictionary\u0020of\u0020additional\u0020filenames",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#property_filenames"
         },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024availableLoglevels",
             "name": "availableLoglevels",
-            "summary": "",
+            "summary": "ordered\u0020\u0028\u0021\u0029\u0020list\u0020of\u0020available\u0020LogLevels",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#property_availableLoglevels"
         },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024localDefaults",
             "name": "localDefaults",
-            "summary": "this\u0020class\u0020is\u0020relies\u0020on\u0020environmental\u0020variables\u003A",
+            "summary": "dictionary\u0020of\u0020defaults\u0020for\u0020used\u0020environmental\u0020variables",
             "url": "classes/macwinnie-PHPHelpers-Logger.html#property_localDefaults"
         },                {
             "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024envs",

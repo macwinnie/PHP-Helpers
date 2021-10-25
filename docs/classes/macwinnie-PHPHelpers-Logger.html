@@ -111,9 +111,9 @@
         <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">39</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.30"  class="phpdocumentor-element-found-in__source" data-line="30" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.39"  class="phpdocumentor-element-found-in__source" data-line="39" data-modal="source-view"></a>
     </aside>
 
             <p class="phpdocumentor-summary">Logger class that handles writing out logfiles for PHP programs.</p>
@@ -128,13 +128,21 @@
 <li>CRITICAL</li>
 <li>ALERT</li>
 <li>EMERGENCY</li>
-<li>RETURN (special one that returns the logmessage instead of writing it out to a file)</li>
 </ul>
 <p>A regular logging entry (in the combined logfile) has the format:
 <code class="prettyprint">Y-m-d H:i:s.u [loglevel] [class_calling] [length]: message</code></p>
 <p>(See PHP documentation for date format; <code class="prettyprint">LOG_MICROSEC=false</code> will remove <code class="prettyprint">.u</code> from date-time.)</p>
 <p>Within the loglevel specific files, the <code class="prettyprint">[loglevel]</code> entry is removed.</p>
 <p><code class="prettyprint">[length]</code> represents the length of the logmessage <code class="prettyprint">message</code> (in Bytes); date, time and the square braced parts are not reflected.</p>
+<p>Possible environmental variables – defaults are defined in <code class="prettyprint">static::$localDefaults</code>:
+| environmental variable | description |
+| ---------------------- | ----------- |
+| <code class="prettyprint">LOG_PATH</code>             | where should the log files be placed? Defaults to <code class="prettyprint">/tmp/logs/</code> |
+| <code class="prettyprint">LOG_LEVEL</code>            | one of the loglevels, defaults to <code class="prettyprint">ERROR</code> |
+| <code class="prettyprint">LOG_MICROSEC</code>         | should microseconds be reflected? Default is <code class="prettyprint">true</code> |
+| <code class="prettyprint">LOG_TIMEZONE</code>         | the timezone the logs should reflect, defaults to environmental variable <code class="prettyprint">TIMEZONE</code> if it exists or <code class="prettyprint">Europe/Berlin</code> |
+| <code class="prettyprint">LOG_COMBINED</code>         | if <code class="prettyprint">true</code>, additionally a <code class="prettyprint">full.log</code> file will be created |
+| <code class="prettyprint">LOG_ONLY_COMBINED</code>    | if <code class="prettyprint">true</code> and <code class="prettyprint">LOG_COMBINED</code> also <code class="prettyprint">true</code>, only the <code class="prettyprint">full.log</code> file is written out – else, there will also be <code class="prettyprint">loglevel.log</code> files |</p>
 </section>
 
 
@@ -155,14 +163,14 @@
     <span>
                 &nbsp;: mixed            </span>
 </dt>
-<dd></dd>
+<dd>ordered (!) list of available LogLevels</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -protected">
     <a href="classes/macwinnie-PHPHelpers-Logger.html#property_localDefaults">$localDefaults</a>
     <span>
                 &nbsp;: mixed            </span>
 </dt>
-<dd>this class is relies on environmental variables:</dd>
+<dd>dictionary of defaults for used environmental variables</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/macwinnie-PHPHelpers-Logger.html#property_clss">$clss</a>
@@ -183,7 +191,7 @@
     <span>
                 &nbsp;: mixed            </span>
 </dt>
-<dd></dd>
+<dd>dictionary of additional filenames</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -property -private">
     <a href="classes/macwinnie-PHPHelpers-Logger.html#property_lvl">$lvl</a>
@@ -242,6 +250,13 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
 </dt>
 <dd>get filename for logfiles</dd>
 
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/macwinnie-PHPHelpers-Logger.html#method_getLogStringFormat">getLogStringFormat()</a>
+    <span>
+                        &nbsp;: string    </span>
+</dt>
+<dd>return the format string for a log message</dd>
+
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
     <a href="classes/macwinnie-PHPHelpers-Logger.html#method___construct">__construct()</a>
     <span>
@@ -255,6 +270,20 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
                         &nbsp;: string    </span>
 </dt>
 <dd>get the name of the calling class for logging</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/macwinnie-PHPHelpers-Logger.html#method_appendToFile">appendToFile()</a>
+    <span>
+                        &nbsp;: mixed    </span>
+</dt>
+<dd>function that performs the write out</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a href="classes/macwinnie-PHPHelpers-Logger.html#method_writeOut">writeOut()</a>
+    <span>
+                        &nbsp;: void    </span>
+</dt>
+<dd>function that arranges the writeout to the logfile</dd>
 
         </dl>
 
@@ -284,21 +313,22 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">36</span>
+    <span class="phpdocumentor-element-found-in__line">55</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.36"  class="phpdocumentor-element-found-in__source" data-line="36" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.55"  class="phpdocumentor-element-found-in__source" data-line="55" data-modal="source-view"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">ordered (!) list of available LogLevels</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$availableLoglevels</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;DEBUG&#039;, &#039;INFO&#039;, &#039;NOTICE&#039;, &#039;WARNING&#039;, &#039;ERROR&#039;, &#039;CRITICAL&#039;, &#039;ALERT&#039;, &#039;EMERGENCY&#039;, &#039;RETURN&#039;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;DEBUG&#039;, &#039;INFO&#039;, &#039;NOTICE&#039;, &#039;WARNING&#039;, &#039;ERROR&#039;, &#039;CRITICAL&#039;, &#039;ALERT&#039;, &#039;EMERGENCY&#039;]</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
+    
+        <section class="phpdocumentor-description"><p>[string]</p>
+</section>
 
     
 
@@ -319,36 +349,22 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">56</span>
+    <span class="phpdocumentor-element-found-in__line">71</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.56"  class="phpdocumentor-element-found-in__source" data-line="56" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.71"  class="phpdocumentor-element-found-in__source" data-line="71" data-modal="source-view"></a>
     </aside>
 
-        <p class="phpdocumentor-summary">this class is relies on environmental variables:</p>
+        <p class="phpdocumentor-summary">dictionary of defaults for used environmental variables</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$localDefaults</span>
-     = <span class="phpdocumentor-signature__default-value">[&#039;LOG_PATH&#039; =&gt; &#039;/tmp/logs/&#039;, &#039;LOG_LEVEL&#039; =&gt; &#039;error&#039;, &#039;LOG_MICROSEC&#039; =&gt; true, &#039;LOG_TIMEZONE&#039; =&gt; &#039;Europe/Berlin&#039;]</span></code>
+     = <span class="phpdocumentor-signature__default-value">[&#039;LOG_PATH&#039; =&gt; &#039;/tmp/logs/&#039;, &#039;LOG_LEVEL&#039; =&gt; &#039;error&#039;, &#039;LOG_MICROSEC&#039; =&gt; true, &#039;LOG_TIMEZONE&#039; =&gt; &#039;Europe/Berlin&#039;, &#039;LOG_COMBINED&#039; =&gt; true, &#039;LOG_ONLY_COMBINED&#039; =&gt; true]</span></code>
 
-        <section class="phpdocumentor-description"><ul>
-<li>
-<code class="prettyprint">LOG_PATH</code> – where should the log files be placed? Defaults to <code class="prettyprint">/tmp/logs/</code>
-</li>
-<li>
-<code class="prettyprint">LOG_LEVEL</code> – one of the loglevels, defaults to <code class="prettyprint">ERROR</code>
-</li>
-<li>
-<code class="prettyprint">LOG_MICROSEC</code> – should microseconds be reflected? Default is <code class="prettyprint">true</code>
-</li>
-<li>
-<code class="prettyprint">LOG_TIMEZONE</code> – the timezone the logs should reflect, defaults to environmental variable <code class="prettyprint">TIMEZONE</code> if it exists or <code class="prettyprint">Europe/Berlin</code>
-</li>
-</ul>
+    
+        <section class="phpdocumentor-description"><p>[mixed]</p>
 </section>
-
-        <section class="phpdocumentor-description"></section>
 
     
 
@@ -369,9 +385,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">67</span>
+    <span class="phpdocumentor-element-found-in__line">85</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.67"  class="phpdocumentor-element-found-in__source" data-line="67" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.85"  class="phpdocumentor-element-found-in__source" data-line="85" data-modal="source-view"></a>
     </aside>
 
     
@@ -404,9 +420,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">63</span>
+    <span class="phpdocumentor-element-found-in__line">81</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.63"  class="phpdocumentor-element-found-in__source" data-line="63" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.81"  class="phpdocumentor-element-found-in__source" data-line="81" data-modal="source-view"></a>
     </aside>
 
     
@@ -439,21 +455,22 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">32</span>
+    <span class="phpdocumentor-element-found-in__line">46</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.32"  class="phpdocumentor-element-found-in__source" data-line="32" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.46"  class="phpdocumentor-element-found-in__source" data-line="46" data-modal="source-view"></a>
     </aside>
 
-    
+        <p class="phpdocumentor-summary">dictionary of additional filenames</p>
+
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">private</span>
     <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$filenames</span>
      = <span class="phpdocumentor-signature__default-value">[&#039;full&#039; =&gt; &#039;full.log&#039;]</span></code>
 
-        <section class="phpdocumentor-description"></section>
-
-        <section class="phpdocumentor-description"></section>
+    
+        <section class="phpdocumentor-description"><p>[string]</p>
+</section>
 
     
 
@@ -474,9 +491,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">65</span>
+    <span class="phpdocumentor-element-found-in__line">83</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.65"  class="phpdocumentor-element-found-in__source" data-line="65" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.83"  class="phpdocumentor-element-found-in__source" data-line="83" data-modal="source-view"></a>
     </aside>
 
     
@@ -509,9 +526,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">66</span>
+    <span class="phpdocumentor-element-found-in__line">84</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.66"  class="phpdocumentor-element-found-in__source" data-line="66" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.84"  class="phpdocumentor-element-found-in__source" data-line="84" data-modal="source-view"></a>
     </aside>
 
     
@@ -544,9 +561,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">68</span>
+    <span class="phpdocumentor-element-found-in__line">86</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.68"  class="phpdocumentor-element-found-in__source" data-line="68" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.86"  class="phpdocumentor-element-found-in__source" data-line="86" data-modal="source-view"></a>
     </aside>
 
     
@@ -554,7 +571,7 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <span class="phpdocumentor-signature__visibility">private</span>
         <span class="phpdocumentor-signature__type">mixed</span>
     <span class="phpdocumentor-signature__name">$spec</span>
-     = <span class="phpdocumentor-signature__default-value">true</span></code>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
 
         <section class="phpdocumentor-description"></section>
 
@@ -579,9 +596,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">64</span>
+    <span class="phpdocumentor-element-found-in__line">82</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.64"  class="phpdocumentor-element-found-in__source" data-line="64" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.82"  class="phpdocumentor-element-found-in__source" data-line="82" data-modal="source-view"></a>
     </aside>
 
     
@@ -618,9 +635,9 @@ returns an `\Exception` on all unkown static method calls on this class</dd>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">132</span>
+    <span class="phpdocumentor-element-found-in__line">203</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.132"  class="phpdocumentor-element-found-in__source" data-line="132" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.203"  class="phpdocumentor-element-found-in__source" data-line="203" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">function that handles loglevel method calls to this static class and
@@ -647,7 +664,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
                 : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>arguments passed for the callable</p>
+                    <section class="phpdocumentor-description"><p>arguments passed for the callable:</p>
+<h1>message</h1>
+<h1>return – should the (loglevel) message be returned?</h1>
 </section>
 
             </dd>
@@ -692,9 +711,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">108</span>
+    <span class="phpdocumentor-element-found-in__line">181</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.108"  class="phpdocumentor-element-found-in__source" data-line="108" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.181"  class="phpdocumentor-element-found-in__source" data-line="181" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">create string representation of current log entry</p>
@@ -728,9 +747,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">186</span>
+    <span class="phpdocumentor-element-found-in__line">265</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.186"  class="phpdocumentor-element-found-in__source" data-line="186" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.265"  class="phpdocumentor-element-found-in__source" data-line="265" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">Ensure that the log path does exist</p>
@@ -764,9 +783,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">174</span>
+    <span class="phpdocumentor-element-found-in__line">248</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.174"  class="phpdocumentor-element-found-in__source" data-line="174" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.248"  class="phpdocumentor-element-found-in__source" data-line="248" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">get filename for logfiles</p>
@@ -818,6 +837,56 @@ returns an `\Exception` on all unkown static method calls on this class</p>
                     <article
         class="phpdocumentor-element
             -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLogStringFormat">
+        getLogStringFormat()
+        <a href="classes/macwinnie-PHPHelpers-Logger.html#method_getLogStringFormat" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">282</span>
+
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.282"  class="phpdocumentor-element-found-in__source" data-line="282" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">return the format string for a log message</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__name">getLogStringFormat</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$logSpecific</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$logSpecific</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>is the log message used in a specific loglevel context,
+e.g. the specific loglevel log file (<code class="prettyprint">true</code>) or not, e.g.
+the global log file</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>log message format</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
             -protected
                                                         "
 >
@@ -828,9 +897,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">76</span>
+    <span class="phpdocumentor-element-found-in__line">96</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.76"  class="phpdocumentor-element-found-in__source" data-line="76" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.96"  class="phpdocumentor-element-found-in__source" data-line="96" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">initialize the logger</p>
@@ -871,6 +940,22 @@ returns an `\Exception` on all unkown static method calls on this class</p>
             </dl>
 
     
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\Exception">Exception</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>thrown when loglevel does not exist</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
     <span class="phpdocumentor-signature__response_type">mixed</span>
@@ -891,9 +976,9 @@ returns an `\Exception` on all unkown static method calls on this class</p>
     <aside class="phpdocumentor-element-found-in">
     <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">150</span>
+    <span class="phpdocumentor-element-found-in__line">224</span>
 
-            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.150"  class="phpdocumentor-element-found-in__source" data-line="150" data-modal="source-view"></a>
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.224"  class="phpdocumentor-element-found-in__source" data-line="224" data-modal="source-view"></a>
     </aside>
 
         <p class="phpdocumentor-summary">get the name of the calling class for logging</p>
@@ -912,6 +997,99 @@ returns an `\Exception` on all unkown static method calls on this class</p>
             <section class="phpdocumentor-description"><p>namespace and class name of calling class</p>
 </section>
 
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_appendToFile">
+        appendToFile()
+        <a href="classes/macwinnie-PHPHelpers-Logger.html#method_appendToFile" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">169</span>
+
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.169"  class="phpdocumentor-element-found-in__source" data-line="169" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function that performs the write out</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__name">appendToFile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$content</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>filename</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$content</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>content to append to the logfile</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>Returns the same like <code class="prettyprint">file_put_contents</code>:
+This function returns the number of bytes that were
+written to the file, or <code class="prettyprint">false</code> on failure.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_writeOut">
+        writeOut()
+        <a href="classes/macwinnie-PHPHelpers-Logger.html#method_writeOut" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/classes/Logger.php"><a href="files/src-classes-logger.html"><abbr title="src/classes/Logger.php">Logger.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">137</span>
+
+            <a href="classes/macwinnie-PHPHelpers-Logger.html#source-view.137"  class="phpdocumentor-element-found-in__source" data-line="137" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function that arranges the writeout to the logfile</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                <span class="phpdocumentor-signature__name">writeOut</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    
+    
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">void</span>
+            &mdash;
+        
     
 </article>
             </section>
