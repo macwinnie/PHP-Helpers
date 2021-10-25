@@ -33,8 +33,6 @@ const REGEX_DELIMITER = '/';
  * ```php
  * <?php
  *
- * use macwinnie\PHPHelpers as rf;
- *
  * $rGroups  = [
  *     'DN'  => [ 0 ],
  *     'uid' => [ 1 ],

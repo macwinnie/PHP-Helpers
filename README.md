@@ -51,7 +51,7 @@ docker run --rm -v $(pwd):/data phpdoc/phpdoc:3 --setting=graphs.enabled=true -d
 cat <<EOF >> docs/css/base.css
 
 code.prettyprint {
-    background: var(--code-background-color);
+    background: var(--primary-color-lighten);
     border: 1px solid var(--code-border-color);
     border-radius: var(--border-radius-base-size);
     padding: 0.1em 0.4em;

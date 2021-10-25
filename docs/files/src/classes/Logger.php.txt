@@ -41,7 +41,7 @@ class Logger {
     /**
      * dictionary of additional filenames
      *
-     * @var [string]
+     * @var array
      */
     static private $filenames = [
         'full' => 'full.log',
@@ -50,7 +50,7 @@ class Logger {
     /**
      * ordered (!) list of available LogLevels
      *
-     * @var [string]
+     * @var array
      */
     static protected $availableLoglevels = [
         'DEBUG',
@@ -66,7 +66,7 @@ class Logger {
     /**
      * dictionary of defaults for used environmental variables
      *
-     * @var [mixed]
+     * @var array
      */
     static protected $localDefaults = [
         'LOG_PATH'          => '/tmp/logs/',
