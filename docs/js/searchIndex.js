@@ -1,40 +1,155 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\macwinnie\\PHPHelpers\\REGEX_DELIMITER",
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger",
+            "name": "Logger",
+            "summary": "Logger\u0020class\u0020that\u0020handles\u0020writing\u0020out\u0020logfiles\u0020for\u0020PHP\u0020programs.",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__construct\u0028\u0029",
+            "name": "__construct",
+            "summary": "initialize\u0020the\u0020logger",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___construct"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AwriteOut\u0028\u0029",
+            "name": "writeOut",
+            "summary": "function\u0020that\u0020arranges\u0020the\u0020writeout\u0020to\u0020the\u0020logfile",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_writeOut"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AappendToFile\u0028\u0029",
+            "name": "appendToFile",
+            "summary": "function\u0020that\u0020performs\u0020the\u0020write\u0020out",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_appendToFile"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__toString\u0028\u0029",
+            "name": "__toString",
+            "summary": "create\u0020string\u0020representation\u0020of\u0020current\u0020log\u0020entry",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___toString"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A__callStatic\u0028\u0029",
+            "name": "__callStatic",
+            "summary": "function\u0020that\u0020handles\u0020loglevel\u0020method\u0020calls\u0020to\u0020this\u0020static\u0020class\u0020and\nreturns\u0020an\u0020\u0060\\Exception\u0060\u0020on\u0020all\u0020unkown\u0020static\u0020method\u0020calls\u0020on\u0020this\u0020class",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method___callStatic"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003Aget_calling_class\u0028\u0029",
+            "name": "get_calling_class",
+            "summary": "get\u0020the\u0020name\u0020of\u0020the\u0020calling\u0020class\u0020for\u0020logging",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_get_calling_class"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AgetFilename\u0028\u0029",
+            "name": "getFilename",
+            "summary": "get\u0020filename\u0020for\u0020logfiles",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_getFilename"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AensureLogPathExists\u0028\u0029",
+            "name": "ensureLogPathExists",
+            "summary": "Ensure\u0020that\u0020the\u0020log\u0020path\u0020does\u0020exist",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_ensureLogPathExists"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003AgetLogStringFormat\u0028\u0029",
+            "name": "getLogStringFormat",
+            "summary": "return\u0020the\u0020format\u0020string\u0020for\u0020a\u0020log\u0020message",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#method_getLogStringFormat"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024filenames",
+            "name": "filenames",
+            "summary": "dictionary\u0020of\u0020additional\u0020filenames",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_filenames"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024availableLoglevels",
+            "name": "availableLoglevels",
+            "summary": "ordered\u0020\u0028\u0021\u0029\u0020list\u0020of\u0020available\u0020LogLevels",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_availableLoglevels"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024localDefaults",
+            "name": "localDefaults",
+            "summary": "dictionary\u0020of\u0020defaults\u0020for\u0020used\u0020environmental\u0020variables",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_localDefaults"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024envs",
+            "name": "envs",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_envs"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024time",
+            "name": "time",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_time"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024lvl",
+            "name": "lvl",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_lvl"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024msg",
+            "name": "msg",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_msg"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024clss",
+            "name": "clss",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_clss"
+        },                {
+            "fqsen": "\\macwinnie\\PHPHelpers\\Logger\u003A\u003A\u0024spec",
+            "name": "spec",
+            "summary": "",
+            "url": "classes/macwinnie-PHPHelpers-Logger.html#property_spec"
+        },                {
+            "fqsen": "\\REGEX_DELIMITER",
             "name": "REGEX_DELIMITER",
             "summary": "regex\u0020delimiter\u0020that\u0020can\u0020be\u0020used\u0020in\u0020combination\u0020with\u0020functions\u0020by\u0020this\nhelper\u0020file",
-            "url": "namespaces/macwinnie-phphelpers.html#constant_REGEX_DELIMITER"
+            "url": "namespaces/default.html#constant_REGEX_DELIMITER"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\format2regex\u0028\u0029",
+            "fqsen": "\\format2regex\u0028\u0029",
             "name": "format2regex",
             "summary": "function\u0020to\u0020translate\u0020format\u0020string\u0020to\u0020regex\u0020to\u0020retrieve\u0020entry\u0020values",
-            "url": "namespaces/macwinnie-phphelpers.html#function_format2regex"
+            "url": "namespaces/default.html#function_format2regex"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\delimiter_preg_quote\u0028\u0029",
+            "fqsen": "\\delimiter_preg_quote\u0028\u0029",
             "name": "delimiter_preg_quote",
             "summary": "helper\u0020function\u0020to\u0020quote\u0020regular\u0020delimiter\u0020\/\u0020in\u0020RegEx\u0020String",
-            "url": "namespaces/macwinnie-phphelpers.html#function_delimiter_preg_quote"
+            "url": "namespaces/default.html#function_delimiter_preg_quote"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\getRegexOccurences\u0028\u0029",
+            "fqsen": "\\getRegexOccurences\u0028\u0029",
             "name": "getRegexOccurences",
             "summary": "function\u0020to\u0020fetch\u0020RegEx\u0020occurences\u0020from\u0020string\u0020\/\u0020template",
-            "url": "namespaces/macwinnie-phphelpers.html#function_getRegexOccurences"
+            "url": "namespaces/default.html#function_getRegexOccurences"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\getArrayValue\u0028\u0029",
+            "fqsen": "\\getArrayValue\u0028\u0029",
             "name": "getArrayValue",
             "summary": "function\u0020to\u0020retrieve\u0020a\u0020specific\u0020value\u0020out\u0020of\u0020a\u0020given\n\u0028nested\u0029\u0020array\u0020by\u0020dot\u002Djoined\u0020following\u0020keys.",
-            "url": "namespaces/macwinnie-phphelpers.html#function_getArrayValue"
+            "url": "namespaces/default.html#function_getArrayValue"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\extractArrayValue\u0028\u0029",
+            "fqsen": "\\extractArrayValue\u0028\u0029",
             "name": "extractArrayValue",
             "summary": "extended\u0020function\u0020\u0060getArrayValue\u0060\u003A\u0020will\u0020remove\u0020value\u0020\u0028and\u0020key\u0029\u0020from\u0020array\nif\u0020found",
-            "url": "namespaces/macwinnie-phphelpers.html#function_extractArrayValue"
+            "url": "namespaces/default.html#function_extractArrayValue"
         },                {
-            "fqsen": "\\macwinnie\\PHPHelpers\\rmValueByKeyTree\u0028\u0029",
+            "fqsen": "\\rmValueByKeyTree\u0028\u0029",
             "name": "rmValueByKeyTree",
             "summary": "function\u0020to\u0020remove\u0020a\u0020value\u0020specified\u0020by\u0020the\u0020key\u002Dtree\u0020from\u0020an\u0020array",
-            "url": "namespaces/macwinnie-phphelpers.html#function_rmValueByKeyTree"
+            "url": "namespaces/default.html#function_rmValueByKeyTree"
+        },                {
+            "fqsen": "\\randomString\u0028\u0029",
+            "name": "randomString",
+            "summary": "function\u0020to\u0020generate\u0020a\u0020random\u0020string\u0020of\u0020a\u0020given\u0020length",
+            "url": "namespaces/default.html#function_randomString"
+        },                {
+            "fqsen": "\\env\u0028\u0029",
+            "name": "env",
+            "summary": "Gets\u0020the\u0020value\u0020of\u0020an\u0020environment\u0020variable.\u0020Supports\u0020boolean,\u0020empty\u0020and\u0020null.",
+            "url": "namespaces/default.html#function_env"
+        },                {
+            "fqsen": "\\val2boolEmptyNull\u0028\u0029",
+            "name": "val2boolEmptyNull",
+            "summary": "helper\u0020function\u0020for\u0020env\u0020function\u0020to\u0020translate\u0020\u0028string\u0029\u0020values\ninto\u0020boolean\u0020values,\u0020empty\u0020string\u0020or\u0020null",
+            "url": "namespaces/default.html#function_val2boolEmptyNull"
+        },                {
+            "fqsen": "\\rm_recursive\u0028\u0029",
+            "name": "rm_recursive",
+            "summary": "Remove\u0020a\u0020directory\u0020and\u0020all\u0020its\u0020content",
+            "url": "namespaces/default.html#function_rm_recursive"
         },                {
             "fqsen": "\\",
             "name": "\\",
