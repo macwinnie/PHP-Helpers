@@ -56,6 +56,10 @@ code.prettyprint {
     border-radius: var(--border-radius-base-size);
     padding: 0.1em 0.4em;
     margin: 0.1em 0.2em;
+    font-size: 0.9em !important;
+}
+pre.prettyprint {
+    font-size: 0.8em !important;
 }
 EOF
 ```

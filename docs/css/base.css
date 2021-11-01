@@ -1110,3 +1110,6 @@ code.prettyprint {
     padding: 0.1em 0.4em;
     margin: 0.1em 0.2em;
 }
+pre.prettyprint {
+    font-size: 0.8em;
+}
