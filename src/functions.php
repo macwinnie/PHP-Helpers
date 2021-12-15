@@ -416,3 +416,49 @@ function trimIfString( $var, $chars = NULL ) {
     }
     return $var;
 }
+
+/**
+ * function to camleize a string
+ *
+ * camelCase is a naming convention in which the
+ * first letter of each word in a compound word
+ * is capitalized, except for the first word.
+ *
+ * @param  string  $value           to convert to camelCase
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  boolean $keepCamel       keep camels – defaults to false
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function camelize( string $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
+
+    $regex = REGEX_DELIMITER . '[' . delimiter_preg_quote ( $chars ) . ']' . REGEX_DELIMITER;
+
+    setlocale( LC_ALL, $normalizeLocale );
+    $value = iconv("UTF-8", "ASCII//TRANSLIT", $value);
+
+    $chunks    = preg_split( $regex, $value );
+
+    if ( $keepCamel ) {
+
+        $oldChunks = $chunks;
+        $chunks = [];
+
+        foreach ( $oldChunks as $s ) {
+            $regex  = REGEX_DELIMITER . '(?=[A-Z])' . REGEX_DELIMITER;
+            $pieces = preg_split( $regex, $s );
+            $chunks = array_merge( $chunks, $pieces );
+        }
+    }
+
+    $ucfirsted = array_map( function ( $s ) {
+        $s = strtolower( $s );
+        return ucfirst( $s );
+    }, $chunks );
+
+    return lcfirst( implode( '', $ucfirsted ) );
+}

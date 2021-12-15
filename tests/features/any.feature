@@ -52,3 +52,30 @@ Feature: Any feature
       | " lorem " | lorem  |
     And trimming quotes from "string" attributes
     Then trimming if is string returns expected values
+
+  @camelize
+  Scenario: Get camelized string
+    Given the string - expected set
+      | string            | expected          |
+      | lorem Ipsum DOLOR | loremIpsumDolor   |
+      | lorem IpsumDolor  | loremIpsumdolor   |
+      | lorem_ipsum_dolor | lorem_ipsum_dolor |
+      | Erd Äpfel         | erdAepfel         |
+    Then camelize returns expected values
+
+  @camelize
+  Scenario: Get camelized string out of snake
+    Given the string - expected set
+      | string            | expected         |
+      | lorem_ipsum_dolor | loremIpsumDolor  |
+      | lorem_ipsumDolor  | loremIpsumdolor  |
+      | lorem_ipsum Dolor | loremIpsum dolor |
+    Then camelize by underscore returns expected values
+
+  @camelize
+  Scenario: Get camelized string keeping existing camels
+    Given the string - expected set
+      | string           | expected        |
+      | Lorem IpsumDolor | loremIpsumDolor |
+      | LoremIpsum_dolor | loremIpsumDolor |
+    Then camelize keeping camels returns expected values

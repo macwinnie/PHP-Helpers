@@ -173,4 +173,32 @@ class AnyContext implements Context {
             Assert::assertSame( $test[ 'expected' ], trimIfString( $test[ 'string' ] ) );
         }
     }
+
+    /**
+     * @Then camelize returns expected values
+     */
+    public function camelizeReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ] ) );
+        }
+    }
+
+    /**
+     * @Then camelize by underscore returns expected values
+     */
+    public function camelizeByUnderscoreReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ], '_' ) );
+        }
+    }
+
+    /**
+     * @Then camelize keeping camels returns expected values
+     */
+    public function camelizeKeepingCamelsReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ], ' _', true ) );
+        }
+    }
+
 }
