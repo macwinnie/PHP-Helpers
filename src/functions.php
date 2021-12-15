@@ -418,6 +418,25 @@ function trimIfString( $var, $chars = NULL ) {
 }
 
 /**
+ * helper function for chunking strings by
+ * a bunch of separator characters
+ *
+ * @param  string $value           string to be chunked
+ * @param  string $chars           characters to chunk by, defaults to space ` `
+ * @param  string $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ * @return array                   list of chunks of string
+ */
+function chunkString( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+    $regex = REGEX_DELIMITER . '[' . delimiter_preg_quote ( $chars ) . ']' . REGEX_DELIMITER;
+
+    setlocale( LC_ALL, $normalizeLocale );
+    $value = iconv("UTF-8", "ASCII//TRANSLIT", $value);
+
+    return preg_split( $regex, $value );
+
+}
+
+/**
  * function to camleize a string
  *
  * camelCase is a naming convention in which the
@@ -434,14 +453,9 @@ function trimIfString( $var, $chars = NULL ) {
  *
  * @return string
  */
-function camelize( string $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
+function camelize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
 
-    $regex = REGEX_DELIMITER . '[' . delimiter_preg_quote ( $chars ) . ']' . REGEX_DELIMITER;
-
-    setlocale( LC_ALL, $normalizeLocale );
-    $value = iconv("UTF-8", "ASCII//TRANSLIT", $value);
-
-    $chunks    = preg_split( $regex, $value );
+    $chunks = chunkString( $value, $chars, $normalizeLocale );
 
     if ( $keepCamel ) {
 
@@ -481,8 +495,31 @@ function camelize( string $value, $chars = ' ', $keepCamel = False, $normalizeLo
  *
  * @return string
  */
-function pascalize( string $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
+function pascalize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
     return ucfirst(
         camelize( $value, $chars, $keepCamel, $normalizeLocale )
     );
+}
+
+/**
+ * snakify a string
+ *
+ * @param  string  $value           to convert to snake_case
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function snakify( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+
+    $chunks = chunkString( $value, $chars, $normalizeLocale );
+
+    $lowered = array_map( function ( $s ) {
+        return strtolower( $s );
+    }, $chunks );
+
+    return implode( '_', $lowered );
 }

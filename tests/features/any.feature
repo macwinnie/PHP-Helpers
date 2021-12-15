@@ -89,3 +89,13 @@ Feature: Any feature
       | lorem_ipsum_dolor | Lorem_ipsum_dolor |
       | Erd Äpfel         | ErdAepfel         |
     Then pascalize returns expected values
+
+  @snakify
+  Scenario: Get snakified string
+    Given the string - expected set
+      | string            | expected          |
+      | lorem Ipsum DOLOR | lorem_ipsum_dolor |
+      | lorem IpsumDolor  | lorem_ipsumdolor   |
+      | lorem_ipsum_dolor | lorem_ipsum_dolor |
+      | Erd Äpfel         | erd_aepfel         |
+    Then snakify returns expected values

@@ -209,4 +209,14 @@ class AnyContext implements Context {
             Assert::assertSame( $test[ 'expected' ], pascalize( $test[ 'string' ] ) );
         }
     }
+
+    /**
+     * @Then snakify returns expected values
+     */
+    public function snakifyReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], snakify( $test[ 'string' ] ) );
+        }
+    }
+
 }
