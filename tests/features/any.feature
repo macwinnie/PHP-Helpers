@@ -79,3 +79,13 @@ Feature: Any feature
       | Lorem IpsumDolor | loremIpsumDolor |
       | LoremIpsum_dolor | loremIpsumDolor |
     Then camelize keeping camels returns expected values
+
+  @pascalize
+  Scenario: Get PascalCase string (single test since small difference between camelCase and PascalCase)
+    Given the string - expected set
+      | string            | expected          |
+      | lorem Ipsum DOLOR | LoremIpsumDolor   |
+      | lorem IpsumDolor  | LoremIpsumdolor   |
+      | lorem_ipsum_dolor | Lorem_ipsum_dolor |
+      | Erd Äpfel         | ErdAepfel         |
+    Then pascalize returns expected values

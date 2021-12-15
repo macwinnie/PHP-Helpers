@@ -201,4 +201,12 @@ class AnyContext implements Context {
         }
     }
 
+    /**
+     * @Then pascalize returns expected values
+     */
+    public function pascalizeReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], pascalize( $test[ 'string' ] ) );
+        }
+    }
 }

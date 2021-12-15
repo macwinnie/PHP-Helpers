@@ -462,3 +462,27 @@ function camelize( string $value, $chars = ' ', $keepCamel = False, $normalizeLo
 
     return lcfirst( implode( '', $ucfirsted ) );
 }
+
+/**
+ * function to turn a string into PascalCase
+ *
+ * PascalCase is a naming convention in which the
+ * first letter of every word in a compound word
+ * is capitalized. The first letter is the only
+ * thing different to camelCase.
+ *
+ * @param  string  $value           to convert to PascalCase
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  boolean $keepCamel       keep camels – defaults to false
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function pascalize( string $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
+    return ucfirst(
+        camelize( $value, $chars, $keepCamel, $normalizeLocale )
+    );
+}
