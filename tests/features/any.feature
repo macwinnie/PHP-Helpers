@@ -42,3 +42,13 @@ Feature: Any feature
       | TEST6 | NULL    | null     |
       | TEST7 | EMPTY   |          |
     Then setting env and receiving the value matches the expected
+
+  @trim
+  Scenario: Get trimmed string out of value
+    Given the string - expected set
+      | string    | expected |
+      | "  lorem" | lorem  |
+      | "lorem  " | lorem  |
+      | " lorem " | lorem  |
+    And trimming quotes from "string" attributes
+    Then trimming if is string returns expected values

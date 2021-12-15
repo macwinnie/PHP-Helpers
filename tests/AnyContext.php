@@ -147,4 +147,30 @@ class AnyContext implements Context {
             Assert::assertSame( $test[ 'expected' ], env( $test[ 'env' ] ) );
         }
     }
+
+    /**
+     * @Given trimming quotes from :arg1 attributes
+     */
+    public function trimmingQuotesFromAttributes( $arg1 ){
+        foreach ( static::$envTest as &$test ) {
+
+            $attr = $test[ $arg1 ];
+            $a    = substr( $attr,  0, 1);
+            $o    = substr( $attr, -1, 1);
+            $quotes = [ '"', "'" ];
+
+            if ( $a == $o and in_array( $a, $quotes ) ) {
+                $test[ $arg1 ] = substr( $attr, 1, strlen( $attr ) - 2 );
+            }
+        }
+    }
+
+    /**
+     * @Then trimming if is string returns expected values
+     */
+    public function trimmingIfIsStringReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], trimIfString( $test[ 'string' ] ) );
+        }
+    }
 }

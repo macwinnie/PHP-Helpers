@@ -396,3 +396,23 @@ function rm_recursive( $path ) {
         return rmdir( $path );
     }
 }
+
+/**
+ * trim value if is a string
+ *
+ * @param  mixed  $var   value to be trimmed if string
+ * @param  string $chars defaults to `NULL` so default of `trim` function is used
+ *
+ * @return mixed         trimmed string if string was given – or untouched value
+ */
+function trimIfString( $var, $chars = NULL ) {
+    if ( is_string( $var ) ) {
+        if ( $chars == NULL ) {
+            $var = trim( $var );
+        }
+        else {
+            $var = trim( $var, $chars );
+        }
+    }
+    return $var;
+}
