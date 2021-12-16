@@ -51,7 +51,7 @@ Feature: Any feature
       | "lorem  " | lorem  |
       | " lorem " | lorem  |
     And trimming quotes from "string" attributes
-    Then trimming if is string returns expected values
+    Then function "trimIfString" returns expected values
 
   @camelize
   Scenario: Get camelized string
@@ -61,7 +61,7 @@ Feature: Any feature
       | lorem IpsumDolor  | loremIpsumdolor   |
       | lorem_ipsum_dolor | lorem_ipsum_dolor |
       | Erd Äpfel         | erdAepfel         |
-    Then camelize returns expected values
+    Then function "camelize" returns expected values
 
   @camelize
   Scenario: Get camelized string out of snake
@@ -86,7 +86,7 @@ Feature: Any feature
       | string              | expected               |
       | pocForCamelCase     | poc For Camel Case     |
       | PascalCaseAlsoWorks | Pascal Case Also Works |
-    Then decamelize returns expected values
+    Then function "decamelize" returns expected values
 
   @pascalize
   Scenario: Get PascalCase string (single test since small difference between camelCase and PascalCase)
@@ -96,14 +96,14 @@ Feature: Any feature
       | lorem IpsumDolor  | LoremIpsumdolor   |
       | lorem_ipsum_dolor | Lorem_ipsum_dolor |
       | Erd Äpfel         | ErdAepfel         |
-    Then pascalize returns expected values
+    Then function "pascalize" returns expected values
 
   @snakify
   Scenario: Get snakified string
     Given the string - expected set
       | string            | expected          |
       | lorem Ipsum DOLOR | lorem_ipsum_dolor |
-      | lorem IpsumDolor  | lorem_ipsumdolor   |
+      | lorem IpsumDolor  | lorem_ipsumdolor  |
       | lorem_ipsum_dolor | lorem_ipsum_dolor |
-      | Erd Äpfel         | erd_aepfel         |
-    Then snakify returns expected values
+      | Erd Äpfel         | erd_aepfel        |
+    Then function "snakify" returns expected values

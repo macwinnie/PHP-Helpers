@@ -166,24 +166,6 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Then trimming if is string returns expected values
-     */
-    public function trimmingIfIsStringReturnsExpectedValues() {
-        foreach ( static::$envTest as $test ) {
-            Assert::assertSame( $test[ 'expected' ], trimIfString( $test[ 'string' ] ) );
-        }
-    }
-
-    /**
-     * @Then camelize returns expected values
-     */
-    public function camelizeReturnsExpectedValues() {
-        foreach ( static::$envTest as $test ) {
-            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ] ) );
-        }
-    }
-
-    /**
      * @Then camelize by underscore returns expected values
      */
     public function camelizeByUnderscoreReturnsExpectedValues() {
@@ -202,29 +184,11 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Then pascalize returns expected values
+     * @Then function :fkt returns expected values
      */
-    public function pascalizeReturnsExpectedValues() {
+    public function functionReturnsExpectedValues( $fkt ) {
         foreach ( static::$envTest as $test ) {
-            Assert::assertSame( $test[ 'expected' ], pascalize( $test[ 'string' ] ) );
-        }
-    }
-
-    /**
-     * @Then snakify returns expected values
-     */
-    public function snakifyReturnsExpectedValues() {
-        foreach ( static::$envTest as $test ) {
-            Assert::assertSame( $test[ 'expected' ], snakify( $test[ 'string' ] ) );
-        }
-    }
-
-    /**
-     * @Then decamelize returns expected values
-     */
-    public function decamelizeReturnsExpectedValues() {
-        foreach ( static::$envTest as $test ) {
-            Assert::assertSame( $test[ 'expected' ], decamelize( $test[ 'string' ] ) );
+            Assert::assertSame( $test[ 'expected' ], $fkt( $test[ 'string' ] ) );
         }
     }
 
