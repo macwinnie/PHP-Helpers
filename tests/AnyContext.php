@@ -93,9 +93,9 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Given the string - expected set
+     * @Given the value matrix
      */
-    public function theStringExpectedSet( TableNode $table ) {
+    public function theValueMatrix( TableNode $table ) {
         static::$envTest = $table->getHash();
     }
 
@@ -128,13 +128,6 @@ class AnyContext implements Context {
             static::checkSpecial( $test[ 'expected' ]);
             Assert::assertSame( $test[ 'expected' ], $fkt( $test[ 'string' ] ) );
         }
-    }
-
-    /**
-     * @Given the env - value - expected set
-     */
-    public function theEnvValueExpectedSet( TableNode $table ) {
-        static::$envTest = $table->getHash();
     }
 
     /**

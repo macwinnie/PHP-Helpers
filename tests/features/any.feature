@@ -12,7 +12,7 @@ Feature: Any feature
 
   @val2boolEmptyNull
   Scenario: Test value to bool / empty / null value
-    Given the string - expected set
+    Given the value matrix
       | string  | expected |
       | lorem   | lorem    |
       | 1       | 1        |
@@ -32,7 +32,7 @@ Feature: Any feature
 
   @env
   Scenario: Get value out of quoted value
-    Given the env - value - expected set
+    Given the value matrix
       | env   | val     | expected |
       | TEST1 | "lorem" | lorem    |
       | TEST2 | 'lorem' | lorem    |
@@ -45,7 +45,7 @@ Feature: Any feature
 
   @trim
   Scenario: Get trimmed string out of value
-    Given the string - expected set
+    Given the value matrix
       | string    | expected |
       | "  lorem" | lorem  |
       | "lorem  " | lorem  |
@@ -53,64 +53,9 @@ Feature: Any feature
     And trimming quotes from "string" attributes
     Then function "trimIfString" returns expected values
 
-  @camelize
-  Scenario: Get camelized string
-    Given the string - expected set
-      | string            | expected          |
-      | lorem Ipsum DOLOR | loremIpsumDolor   |
-      | lorem IpsumDolor  | loremIpsumdolor   |
-      | lorem_ipsum_dolor | lorem_ipsum_dolor |
-      | Erd Äpfel         | erdAepfel         |
-    Then function "camelize" returns expected values
-
-  @camelize
-  Scenario: Get camelized string out of snake
-    Given the string - expected set
-      | string            | expected         |
-      | lorem_ipsum_dolor | loremIpsumDolor  |
-      | lorem_ipsumDolor  | loremIpsumdolor  |
-      | lorem_ipsum Dolor | loremIpsum dolor |
-    Then camelize by underscore returns expected values
-
-  @camelize
-  Scenario: Get camelized string keeping existing camels
-    Given the string - expected set
-      | string           | expected        |
-      | Lorem IpsumDolor | loremIpsumDolor |
-      | LoremIpsum_dolor | loremIpsumDolor |
-    Then camelize keeping camels returns expected values
-
-  @camelize
-  Scenario: invert camelization of a string
-    Given the string - expected set
-      | string              | expected               |
-      | pocForCamelCase     | poc For Camel Case     |
-      | PascalCaseAlsoWorks | Pascal Case Also Works |
-    Then function "decamelize" returns expected values
-
-  @pascalize
-  Scenario: Get PascalCase string (single test since small difference between camelCase and PascalCase)
-    Given the string - expected set
-      | string            | expected          |
-      | lorem Ipsum DOLOR | LoremIpsumDolor   |
-      | lorem IpsumDolor  | LoremIpsumdolor   |
-      | lorem_ipsum_dolor | Lorem_ipsum_dolor |
-      | Erd Äpfel         | ErdAepfel         |
-    Then function "pascalize" returns expected values
-
-  @snakify
-  Scenario: Get snakified string
-    Given the string - expected set
-      | string            | expected          |
-      | lorem Ipsum DOLOR | lorem_ipsum_dolor |
-      | lorem IpsumDolor  | lorem_ipsumdolor  |
-      | lorem_ipsum_dolor | lorem_ipsum_dolor |
-      | Erd Äpfel         | erd_aepfel        |
-    Then function "snakify" returns expected values
-
   @strToBool
   Scenario: Test value to boolean
-    Given the string - expected set
+    Given the value matrix
       | string  | expected |
       | lorem   | false    |
       | 1       | true     |
