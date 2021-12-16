@@ -53,7 +53,7 @@ Feature: Any feature
     And trimming quotes from "string" attributes
     Then function "trimIfString" returns expected values
 
-  @strToBool
+  @str2bool
   Scenario: Test value to boolean
     Given the value matrix
       | string  | expected |
@@ -72,7 +72,7 @@ Feature: Any feature
       | false   | false    |
       | (no)    | false    |
       | no      | false    |
-    Then boolean function "strToBool" returns expected values
+    Then boolean function "str2bool" returns expected values
 
   @startsWith
   Scenario: Test if string starts with sequence

@@ -558,7 +558,7 @@ function snakify( string $value, string $chars = ' ', string $normalizeLocale = 
  *
  * @return boolean                  the converted value – `true` or `false`
  */
-function strToBool( string $check, array $trueStrings = [ '1' ] ) {
+function str2bool( string $check, array $trueStrings = [ '1' ] ) {
     $check = val2boolEmptyNull( $check );
     if ( is_bool( $check ) ) {
         return $check;

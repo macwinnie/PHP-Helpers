@@ -195,7 +195,7 @@ class AnyContext implements Context {
                 startsWith(
                     $test[ 'haystack' ],
                     $test[ 'needle' ],
-                    strToBool( $test[ 'trim' ] )
+                    str2bool( $test[ 'trim' ] )
                 )
             );
         }
@@ -211,7 +211,7 @@ class AnyContext implements Context {
                 endsWith(
                     $test[ 'haystack' ],
                     $test[ 'needle' ],
-                    strToBool( $test[ 'trim' ] )
+                    str2bool( $test[ 'trim' ] )
                 )
             );
         }
