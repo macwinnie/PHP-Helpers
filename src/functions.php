@@ -639,3 +639,28 @@ function endsWith( string $haystack, string $needle, bool $trim = false ) {
         return  $length === 0 || ( substr( $haystack, -$length ) === $needle );
     }
 }
+
+/**
+ * recursive in_array function
+ *
+ * @param  mixed   $needle   element to be searched within `$haystack`
+ * @param  array   $haystack haystack to be searched in
+ * @param  boolean $strict   if set true, a strict check by `===` is performed
+ *                           instead of the simple check `==`
+ *
+ * @return boolean           value found or not
+ */
+function in_array_recursive ( mixed $needle, array $haystack, bool $strict = false ) {
+
+    foreach ( $haystack as $item ) {
+
+        if (
+            ( $strict ? $item === $needle : $item == $needle ) ||
+            ( is_array( $item ) && in_array_recursive( $needle, $item, $strict ) )
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}

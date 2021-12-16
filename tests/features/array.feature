@@ -76,3 +76,60 @@ Feature: work with arrays
         }
       }
       """
+
+  @inArrayRecursive @cur
+  Scenario: Successfully find an element within an array
+    Given the JSON array
+      """
+      {
+        "lorem.ipsum": {
+          "dolor": {
+            "sit": "amet",
+            "consectetur" : "sadipscing"
+          }
+        }
+      }
+      """
+    Then searching for JSON returns "true"
+      """
+      "sadipscing"
+      """
+
+  @inArrayRecursive @cur
+  Scenario: Successfully find an element within an array
+    Given the JSON array
+      """
+      {
+        "lorem.ipsum": {
+          "dolor": {
+            "sit": "amet",
+            "consectetur" : "sadipscing"
+          }
+        }
+      }
+      """
+    Then searching for JSON returns "true"
+      """
+      {
+        "sit": "amet",
+        "consectetur" : "sadipscing"
+      }
+      """
+
+  @inArrayRecursive @cur
+  Scenario: Don't find an element within an array
+    Given the JSON array
+      """
+      {
+        "lorem.ipsum": {
+          "dolor": {
+            "sit": "amet",
+            "consectetur" : "sadipscing"
+          }
+        }
+      }
+      """
+    Then searching for JSON returns "false"
+      """
+      "lorem"
+      """

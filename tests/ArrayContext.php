@@ -8,6 +8,7 @@ use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\ExpectationFailedException;
 use Behat\Behat\Tester\Exception\PendingException;
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 
 /**
  * Defines application features from the specific context.
@@ -18,10 +19,10 @@ class ArrayContext implements Context {
     protected static $foundValue     = NULL;
 
     /**
-     * @BeforeFeature
+     * @BeforeScenario
      */
-    // prepare for feature execution
-    public static function prepareForTheFeature() {
+    // prepare for scenario execution
+    public static function prepareForTheScenario( BeforeScenarioScope $scope ) {
         static::$inspectedArray = [];
         static::$foundValue     = NULL;
     }
@@ -83,5 +84,18 @@ class ArrayContext implements Context {
         ksort( $curArr );
         $compare = json_encode( $curArr );
         Assert::assertEquals( $string, $compare );
+    }
+
+    /**
+     * @Then searching for JSON returns :bool
+     */
+    public function searchingForJsonReturns( $bool, PyStringNode $string) {
+        Assert::assertSame(
+            str2bool( $bool ),
+            in_array_recursive(
+                json_decode( $string, true ),
+                static::$inspectedArray
+            )
+        );
     }
 }
