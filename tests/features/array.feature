@@ -1,7 +1,7 @@
-Feature: get array value
-  In order to get a value out of an array
+Feature: work with arrays
+  In order to work with complex data structures
   As a developer of PHP tools
-  I need to be able to define a dot-joined key-tree to fetch a specific value
+  I need to be able to work with arrays
 
   @getArrayValue
   Scenario: Basic array test
