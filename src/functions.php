@@ -437,6 +437,34 @@ function chunkString( string $value, string $chars = ' ', string $normalizeLocal
 }
 
 /**
+ * Invert the camelCase or PascalCase of a string into its parts. Case of words will not be changed!
+ *
+ * @param  string       $camel            the camelCase / PascalCase to be split
+ * @param  mixed|string $delimiterImplode defaults to a normal space ` ` – if set to `NULL`,
+ *                                        the list of elements, the given string consists of,
+ *                                        will be returned instead of a imploded string.
+ *
+ * @return array|string                   if `$delimiterImplode` is set to `NULL`, an array of strings
+ *                                        is returned – if the value of `$delimiterImplode` allows to
+ *                                        implode the string parts of the camelCase / PascalCase
+ *                                        string, that imploded string is returned.
+ */
+function decamelize( string $camel, mixed $delimiterImplode = ' ' ) {
+    $regex  = REGEX_DELIMITER . '(?=[A-Z])' . REGEX_DELIMITER;
+    $pieces = preg_split( $regex, $camel );
+    $pieces = array_filter( $pieces, fn( $value ) => ! is_null( $value ) && $value !== '' );
+    try {
+        if ( $delimiterImplode == NULL ) {
+            throw new \Exception( 'Return pieces' );
+        }
+        $implode = implode( $delimiterImplode, $pieces );
+        return $implode;
+    } catch ( \Exception $e ) {
+        return $pieces;
+    }
+}
+
+/**
  * function to camleize a string
  *
  * camelCase is a naming convention in which the
@@ -462,10 +490,8 @@ function camelize( string $value, string $chars = ' ', bool $keepCamel = False, 
         $oldChunks = $chunks;
         $chunks = [];
 
-        foreach ( $oldChunks as $s ) {
-            $regex  = REGEX_DELIMITER . '(?=[A-Z])' . REGEX_DELIMITER;
-            $pieces = preg_split( $regex, $s );
-            $chunks = array_merge( $chunks, $pieces );
+        foreach ( $oldChunks as $chunk ) {
+            $chunks = array_merge( $chunks, decamelize( $chunk, NULL ) );
         }
     }
 

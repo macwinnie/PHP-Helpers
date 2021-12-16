@@ -80,6 +80,14 @@ Feature: Any feature
       | LoremIpsum_dolor | loremIpsumDolor |
     Then camelize keeping camels returns expected values
 
+  @camelize
+  Scenario: invert camelization of a string
+    Given the string - expected set
+      | string              | expected               |
+      | pocForCamelCase     | poc For Camel Case     |
+      | PascalCaseAlsoWorks | Pascal Case Also Works |
+    Then decamelize returns expected values
+
   @pascalize
   Scenario: Get PascalCase string (single test since small difference between camelCase and PascalCase)
     Given the string - expected set

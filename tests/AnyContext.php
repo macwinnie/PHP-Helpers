@@ -219,4 +219,13 @@ class AnyContext implements Context {
         }
     }
 
+    /**
+     * @Then decamelize returns expected values
+     */
+    public function decamelizeReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], decamelize( $test[ 'string' ] ) );
+        }
+    }
+
 }
