@@ -482,25 +482,9 @@ function decamelize( string $camel, mixed $delimiterImplode = ' ' ) {
  * @return string
  */
 function camelize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
-
-    $chunks = chunkString( $value, $chars, $normalizeLocale );
-
-    if ( $keepCamel ) {
-
-        $oldChunks = $chunks;
-        $chunks = [];
-
-        foreach ( $oldChunks as $chunk ) {
-            $chunks = array_merge( $chunks, decamelize( $chunk, NULL ) );
-        }
-    }
-
-    $ucfirsted = array_map( function ( $s ) {
-        $s = strtolower( $s );
-        return ucfirst( $s );
-    }, $chunks );
-
-    return lcfirst( implode( '', $ucfirsted ) );
+    return lcfirst(
+        pascalize( $value, $chars, $keepCamel, $normalizeLocale )
+    );
 }
 
 /**
@@ -522,9 +506,25 @@ function camelize( string $value, string $chars = ' ', bool $keepCamel = False, 
  * @return string
  */
 function pascalize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
-    return ucfirst(
-        camelize( $value, $chars, $keepCamel, $normalizeLocale )
-    );
+
+    $chunks = chunkString( $value, $chars, $normalizeLocale );
+
+    if ( $keepCamel ) {
+
+        $oldChunks = $chunks;
+        $chunks = [];
+
+        foreach ( $oldChunks as $chunk ) {
+            $chunks = array_merge( $chunks, decamelize( $chunk, NULL ) );
+        }
+    }
+
+    $ucfirsted = array_map( function ( $s ) {
+        $s = strtolower( $s );
+        return ucfirst( $s );
+    }, $chunks );
+
+    return implode( '', $ucfirsted );
 }
 
 /**
