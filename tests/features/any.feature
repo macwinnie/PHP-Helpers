@@ -73,3 +73,23 @@ Feature: Any feature
       | (no)    | false    |
       | no      | false    |
     Then boolean function "strToBool" returns expected values
+
+  @startsWith
+  Scenario: Test if string starts with sequence
+    Given the value matrix
+      | haystack | needle | trim | expected |
+      | lorem    | nope   | 0    | false    |
+      | lorem    | lo     | 0    | true     |
+      | lorem    | nope   | 1    | lorem    |
+      | lorem    | lo     | 1    | rem      |
+    Then running startsWith function returns expected
+
+  @endsWith
+  Scenario: Test if string ends with sequence
+    Given the value matrix
+      | haystack | needle | trim | expected |
+      | lorem    | nope   | 0    | false    |
+      | lorem    | em     | 0    | true     |
+      | lorem    | nope   | 1    | lorem    |
+      | lorem    | em     | 1    | lor      |
+    Then running endsWith function returns expected

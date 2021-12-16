@@ -573,3 +573,69 @@ function strToBool( string $check, array $trueStrings = [ '1' ] ) {
         return $bool;
     }
 }
+
+/**
+ * function to check if a string begins with string sequence
+ *
+ * @param  string      $haystack the haystack to search in
+ * @param  string      $needle   the string to search for in `$haystack`
+ * @param  boolean     $trim     defaults to `false`
+ *
+ * @return bool|string           By default, the boolean check result value
+ *                               will be returned.
+ *                               If `$trim` is set `true`, the trimmed string
+ *                               will be returned.
+ */
+function startsWith( string $haystack, string $needle, bool $trim = false ) {
+
+    $haystack = trim( $haystack );
+    $length   = strlen( $needle );
+
+    if ( $trim ) {
+
+        if ( substr( $haystack, 0, $length ) === $needle ) {
+            return trim( substr( $haystack, $length ) );
+        }
+
+        return $haystack;
+    }
+    else {
+        return  substr( $haystack, 0, $length ) === $needle;
+    }
+}
+
+/**
+ * function to check if a string ends with string sequence
+ *
+ * @param  string      $haystack the haystack to search in
+ * @param  string      $needle   the string to search for in `$haystack`
+ * @param  boolean     $trim     defaults to `false`
+ *
+ * @return bool|string           By default, the boolean check result value
+ *                               will be returned.
+ *                               If `$trim` is set `true`, the trimmed string
+ *                               will be returned.
+ */
+function endsWith( string $haystack, string $needle, bool $trim = false ) {
+
+    $haystack = trim( $haystack );
+    $length   = strlen( $needle );
+
+    if ( $trim ) {
+
+        if (
+            $length === 0 ||
+            ( substr( $haystack, -$length ) === $needle )
+        ) {
+
+            $fulllength = strlen( $haystack );
+
+            return trim( substr( $haystack, 0, $fulllength - $length ) );
+        }
+
+        return $haystack;
+    }
+    else {
+        return  $length === 0 || ( substr( $haystack, -$length ) === $needle );
+    }
+}

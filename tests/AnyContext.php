@@ -185,4 +185,36 @@ class AnyContext implements Context {
         }
     }
 
+    /**
+     * @Then running startsWith function returns expected
+     */
+    public function runningStartswithFunctionReturnsExpected() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame(
+                val2boolEmptyNull( $test[ 'expected' ] ),
+                startsWith(
+                    $test[ 'haystack' ],
+                    $test[ 'needle' ],
+                    strToBool( $test[ 'trim' ] )
+                )
+            );
+        }
+    }
+
+    /**
+     * @Then running endsWith function returns expected
+     */
+    public function runningEndswithFunctionReturnsExpected() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame(
+                val2boolEmptyNull( $test[ 'expected' ] ),
+                endsWith(
+                    $test[ 'haystack' ],
+                    $test[ 'needle' ],
+                    strToBool( $test[ 'trim' ] )
+                )
+            );
+        }
+    }
+
 }
