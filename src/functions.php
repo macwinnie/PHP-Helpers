@@ -549,3 +549,27 @@ function snakify( string $value, string $chars = ' ', string $normalizeLocale = 
 
     return implode( '_', $lowered );
 }
+
+/**
+ * function to convert a boolean string to real boolean
+ *
+ * @param  string  $check           string to be checked
+ * @param  array   $trueAdditionals list of additional strings interpreted as `true`
+ *
+ * @return boolean                  the converted value – `true` or `false`
+ */
+function strToBool( string $check, array $trueStrings = [ '1' ] ) {
+    $check = val2boolEmptyNull( $check );
+    if ( is_bool( $check ) ) {
+        return $check;
+    }
+    else {
+        $bool = false;
+        foreach ( $trueStrings as $val ) {
+            if ( $check === $val ) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+}

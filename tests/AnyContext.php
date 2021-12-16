@@ -121,12 +121,12 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Then transforming with val2boolEmptyNull returns the expected
+     * @Then boolean function :fkt returns expected values
      */
-    public function transformingWithValboolemptynullReturnsTheExpected() {
+    public function booleanFunctionReturnsExpectedValues( $fkt ) {
         foreach ( static::$envTest as $test ) {
             static::checkSpecial( $test[ 'expected' ]);
-            Assert::assertSame( $test[ 'expected' ], val2boolEmptyNull( $test[ 'string' ] ) );
+            Assert::assertSame( $test[ 'expected' ], $fkt( $test[ 'string' ] ) );
         }
     }
 

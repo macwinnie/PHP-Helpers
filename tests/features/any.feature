@@ -28,7 +28,7 @@ Feature: Any feature
       | false   | false    |
       | (no)    | false    |
       | no      | false    |
-    Then transforming with val2boolEmptyNull returns the expected
+    Then boolean function "val2boolEmptyNull" returns expected values
 
   @env
   Scenario: Get value out of quoted value
@@ -107,3 +107,24 @@ Feature: Any feature
       | lorem_ipsum_dolor | lorem_ipsum_dolor |
       | Erd Äpfel         | erd_aepfel        |
     Then function "snakify" returns expected values
+
+  @strToBool
+  Scenario: Test value to boolean
+    Given the string - expected set
+      | string  | expected |
+      | lorem   | false    |
+      | 1       | true     |
+      | 0       | false    |
+      | (null)  | false    |
+      | null    | false    |
+      | empty   | false    |
+      | (empty) | false    |
+      | (true)  | true     |
+      | true    | true     |
+      | (yes)   | true     |
+      | yes     | true     |
+      | (false) | false    |
+      | false   | false    |
+      | (no)    | false    |
+      | no      | false    |
+    Then boolean function "strToBool" returns expected values
