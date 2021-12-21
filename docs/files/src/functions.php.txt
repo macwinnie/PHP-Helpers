@@ -396,3 +396,271 @@ function rm_recursive( $path ) {
         return rmdir( $path );
     }
 }
+
+/**
+ * trim value if is a string
+ *
+ * @param  mixed  $var   value to be trimmed if string
+ * @param  string $chars defaults to `NULL` so default of `trim` function is used
+ *
+ * @return mixed         trimmed string if string was given – or untouched value
+ */
+function trimIfString( $var, $chars = NULL ) {
+    if ( is_string( $var ) ) {
+        if ( $chars == NULL ) {
+            $var = trim( $var );
+        }
+        else {
+            $var = trim( $var, $chars );
+        }
+    }
+    return $var;
+}
+
+/**
+ * helper function for chunking strings by
+ * a bunch of separator characters
+ *
+ * @param  string $value           string to be chunked
+ * @param  string $chars           characters to chunk by, defaults to space ` `
+ * @param  string $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ * @return array                   list of chunks of string
+ */
+function chunkString( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+    $regex = REGEX_DELIMITER . '[' . delimiter_preg_quote ( $chars ) . ']' . REGEX_DELIMITER;
+
+    setlocale( LC_ALL, $normalizeLocale );
+    $value = iconv("UTF-8", "ASCII//TRANSLIT", $value);
+
+    return preg_split( $regex, $value );
+
+}
+
+/**
+ * Invert the camelCase or PascalCase of a string into its parts. Case of words will not be changed!
+ *
+ * @param  string       $camel            the camelCase / PascalCase to be split
+ * @param  mixed|string $delimiterImplode defaults to a normal space ` ` – if set to `NULL`,
+ *                                        the list of elements, the given string consists of,
+ *                                        will be returned instead of a imploded string.
+ *
+ * @return array|string                   if `$delimiterImplode` is set to `NULL`, an array of strings
+ *                                        is returned – if the value of `$delimiterImplode` allows to
+ *                                        implode the string parts of the camelCase / PascalCase
+ *                                        string, that imploded string is returned.
+ */
+function decamelize( string $camel, mixed $delimiterImplode = ' ' ) {
+    $regex  = REGEX_DELIMITER . '(?=[A-Z])' . REGEX_DELIMITER;
+    $pieces = preg_split( $regex, $camel );
+    $pieces = array_filter( $pieces, fn( $value ) => ! is_null( $value ) && $value !== '' );
+    try {
+        if ( $delimiterImplode == NULL ) {
+            throw new \Exception( 'Return pieces' );
+        }
+        $implode = implode( $delimiterImplode, $pieces );
+        return $implode;
+    } catch ( \Exception $e ) {
+        return $pieces;
+    }
+}
+
+/**
+ * function to camleize a string
+ *
+ * camelCase is a naming convention in which the
+ * first letter of each word in a compound word
+ * is capitalized, except for the first word.
+ *
+ * @param  string  $value           to convert to camelCase
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  boolean $keepCamel       keep camels – defaults to false
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function camelize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
+    return lcfirst(
+        pascalize( $value, $chars, $keepCamel, $normalizeLocale )
+    );
+}
+
+/**
+ * function to turn a string into PascalCase
+ *
+ * PascalCase is a naming convention in which the
+ * first letter of every word in a compound word
+ * is capitalized. The first letter is the only
+ * thing different to camelCase.
+ *
+ * @param  string  $value           to convert to PascalCase
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  boolean $keepCamel       keep camels – defaults to false
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function pascalize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
+
+    $chunks = chunkString( $value, $chars, $normalizeLocale );
+
+    if ( $keepCamel ) {
+
+        $oldChunks = $chunks;
+        $chunks = [];
+
+        foreach ( $oldChunks as $chunk ) {
+            $chunks = array_merge( $chunks, decamelize( $chunk, NULL ) );
+        }
+    }
+
+    $ucfirsted = array_map( function ( $s ) {
+        $s = strtolower( $s );
+        return ucfirst( $s );
+    }, $chunks );
+
+    return implode( '', $ucfirsted );
+}
+
+/**
+ * snakify a string
+ *
+ * @param  string  $value           to convert to snake_case
+ * @param  string  $chars           string containing all characters, to
+ *                                  separate the string at
+ * @param  string  $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
+ *                                  documentation since that is relevant for
+ *                                  translating umlauts like `Ä` into `AE` ...
+ *
+ * @return string
+ */
+function snakify( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+
+    $chunks = chunkString( $value, $chars, $normalizeLocale );
+
+    $lowered = array_map( function ( $s ) {
+        return strtolower( $s );
+    }, $chunks );
+
+    return implode( '_', $lowered );
+}
+
+/**
+ * function to convert a boolean string to real boolean
+ *
+ * @param  string  $check           string to be checked
+ * @param  array   $trueAdditionals list of additional strings interpreted as `true`
+ *
+ * @return boolean                  the converted value – `true` or `false`
+ */
+function str2bool( string $check, array $trueStrings = [ '1' ] ) {
+    $check = val2boolEmptyNull( $check );
+    if ( is_bool( $check ) ) {
+        return $check;
+    }
+    else {
+        $bool = false;
+        foreach ( $trueStrings as $val ) {
+            if ( $check === $val ) {
+                $bool = true;
+            }
+        }
+        return $bool;
+    }
+}
+
+/**
+ * function to check if a string begins with string sequence
+ *
+ * @param  string      $haystack the haystack to search in
+ * @param  string      $needle   the string to search for in `$haystack`
+ * @param  boolean     $trim     defaults to `false`
+ *
+ * @return bool|string           By default, the boolean check result value
+ *                               will be returned.
+ *                               If `$trim` is set `true`, the trimmed string
+ *                               will be returned.
+ */
+function startsWith( string $haystack, string $needle, bool $trim = false ) {
+
+    $haystack = trim( $haystack );
+    $length   = strlen( $needle );
+
+    if ( $trim ) {
+
+        if ( substr( $haystack, 0, $length ) === $needle ) {
+            return trim( substr( $haystack, $length ) );
+        }
+
+        return $haystack;
+    }
+    else {
+        return  substr( $haystack, 0, $length ) === $needle;
+    }
+}
+
+/**
+ * function to check if a string ends with string sequence
+ *
+ * @param  string      $haystack the haystack to search in
+ * @param  string      $needle   the string to search for in `$haystack`
+ * @param  boolean     $trim     defaults to `false`
+ *
+ * @return bool|string           By default, the boolean check result value
+ *                               will be returned.
+ *                               If `$trim` is set `true`, the trimmed string
+ *                               will be returned.
+ */
+function endsWith( string $haystack, string $needle, bool $trim = false ) {
+
+    $haystack = trim( $haystack );
+    $length   = strlen( $needle );
+
+    if ( $trim ) {
+
+        if (
+            $length === 0 ||
+            ( substr( $haystack, -$length ) === $needle )
+        ) {
+
+            $fulllength = strlen( $haystack );
+
+            return trim( substr( $haystack, 0, $fulllength - $length ) );
+        }
+
+        return $haystack;
+    }
+    else {
+        return  $length === 0 || ( substr( $haystack, -$length ) === $needle );
+    }
+}
+
+/**
+ * recursive in_array function
+ *
+ * @param  mixed   $needle   element to be searched within `$haystack`
+ * @param  array   $haystack haystack to be searched in
+ * @param  boolean $strict   if set true, a strict check by `===` is performed
+ *                           instead of the simple check `==`
+ *
+ * @return boolean           value found or not
+ */
+function in_array_recursive ( mixed $needle, array $haystack, bool $strict = false ) {
+
+    foreach ( $haystack as $item ) {
+
+        if (
+            ( $strict ? $item === $needle : $item == $needle ) ||
+            ( is_array( $item ) && in_array_recursive( $needle, $item, $strict ) )
+        ) {
+            return true;
+        }
+    }
+
+    return false;
+}

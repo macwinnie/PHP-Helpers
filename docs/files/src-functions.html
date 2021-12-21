@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>PHP-Helpers</title>
+            <title>PHP-Helpers</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -118,36 +119,36 @@
             <dt class="phpdocumentor-table-of-contents__entry -constant -public">
     <a href="namespaces/default.html#constant_REGEX_DELIMITER">REGEX_DELIMITER</a>
     <span>
-        &nbsp;= &#039;/&#039;                    </span>
+        &nbsp;= &#039;/&#039;                            </span>
 </dt>
 <dd>regex delimiter that can be used in combination with functions by this
 helper file</dd>
 
-                        <dt class="phpdocumentor-table-of-contents__entry -function -">
+                            <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_format2regex">format2regex()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>function to translate format string to regex to retrieve entry values</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_delimiter_preg_quote">delimiter_preg_quote()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>helper function to quote regular delimiter / in RegEx String</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_getRegexOccurences">getRegexOccurences()</a>
     <span>
-                        &nbsp;: array&lt;string|int, mixed&gt;    </span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
 </dt>
 <dd>function to fetch RegEx occurences from string / template</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_getArrayValue">getArrayValue()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>function to retrieve a specific value out of a given
 (nested) array by dot-joined following keys.</dd>
@@ -155,7 +156,7 @@ helper file</dd>
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_extractArrayValue">extractArrayValue()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>extended function `getArrayValue`: will remove value (and key) from array
 if found</dd>
@@ -163,28 +164,28 @@ if found</dd>
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_rmValueByKeyTree">rmValueByKeyTree()</a>
     <span>
-                        &nbsp;: void    </span>
+                                &nbsp;: void    </span>
 </dt>
 <dd>function to remove a value specified by the key-tree from an array</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_randomString">randomString()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: string    </span>
 </dt>
 <dd>function to generate a random string of a given length</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_env">env()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>Gets the value of an environment variable. Supports boolean, empty and null.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_val2boolEmptyNull">val2boolEmptyNull()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
 <dd>helper function for env function to translate (string) values
 into boolean values, empty string or null</dd>
@@ -192,9 +193,80 @@ into boolean values, empty string or null</dd>
             <dt class="phpdocumentor-table-of-contents__entry -function -">
     <a href="namespaces/default.html#function_rm_recursive">rm_recursive()</a>
     <span>
-                        &nbsp;: bool    </span>
+                                &nbsp;: bool    </span>
 </dt>
 <dd>Remove a directory and all its content</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_trimIfString">trimIfString()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>trim value if is a string</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_chunkString">chunkString()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;    </span>
+</dt>
+<dd>helper function for chunking strings by
+a bunch of separator characters</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_decamelize">decamelize()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, mixed&gt;|string    </span>
+</dt>
+<dd>Invert the camelCase or PascalCase of a string into its parts. Case of words will not be changed!</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_camelize">camelize()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>function to camleize a string</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_pascalize">pascalize()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>function to turn a string into PascalCase</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_snakify">snakify()</a>
+    <span>
+                                &nbsp;: string    </span>
+</dt>
+<dd>snakify a string</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_str2bool">str2bool()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>function to convert a boolean string to real boolean</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_startsWith">startsWith()</a>
+    <span>
+                                &nbsp;: bool|string    </span>
+</dt>
+<dd>function to check if a string begins with string sequence</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_endsWith">endsWith()</a>
+    <span>
+                                &nbsp;: bool|string    </span>
+</dt>
+<dd>function to check if a string ends with string sequence</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -function -">
+    <a href="namespaces/default.html#function_in_array_recursive">in_array_recursive()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>recursive in_array function</dd>
 
     </dl>
 
@@ -841,6 +913,631 @@ into boolean values, empty string or null</p>
     <span class="phpdocumentor-signature__response_type">bool</span>
             &mdash;
             <section class="phpdocumentor-description"><p><code class="prettyprint">true</code> on success, <code class="prettyprint">false</code> on error</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_trimIfString">
+        trimIfString()
+        <a href="namespaces/default.html#function_trimIfString" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">408</span>
+
+            <a href="files/src-functions.html#source-view.408"  class="phpdocumentor-element-found-in__source" data-line="408" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">trim value if is a string</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">trimIfString</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$var</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">NULL</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$var</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>value to be trimmed if string</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">NULL</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">NULL</code> so default of <code class="prettyprint">trim</code> function is used</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">mixed</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>trimmed string if string was given – or untouched value</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_chunkString">
+        chunkString()
+        <a href="namespaces/default.html#function_chunkString" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">429</span>
+
+            <a href="files/src-functions.html#source-view.429"  class="phpdocumentor-element-found-in__source" data-line="429" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">helper function for chunking strings by
+a bunch of separator characters</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">chunkString</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$normalizeLocale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>string to be chunked</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>characters to chunk by, defaults to space <code class="prettyprint"> </code></p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$normalizeLocale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">de_DE</code> – have a look on to <code class="prettyprint">iconv</code></p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>list of chunks of string</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_decamelize">
+        decamelize()
+        <a href="namespaces/default.html#function_decamelize" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">452</span>
+
+            <a href="files/src-functions.html#source-view.452"  class="phpdocumentor-element-found-in__source" data-line="452" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">Invert the camelCase or PascalCase of a string into its parts. Case of words will not be changed!</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">decamelize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$camel</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed|string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$delimiterImplode</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$camel</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the camelCase / PascalCase to be split</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$delimiterImplode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed|string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to a normal space <code class="prettyprint"> </code> – if set to <code class="prettyprint">NULL</code>,
+the list of elements, the given string consists of,
+will be returned instead of a imploded string.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, mixed&gt;|string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>if <code class="prettyprint">$delimiterImplode</code> is set to <code class="prettyprint">NULL</code>, an array of strings
+is returned – if the value of <code class="prettyprint">$delimiterImplode</code> allows to
+implode the string parts of the camelCase / PascalCase
+string, that imploded string is returned.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_camelize">
+        camelize()
+        <a href="namespaces/default.html#function_camelize" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">484</span>
+
+            <a href="files/src-functions.html#source-view.484"  class="phpdocumentor-element-found-in__source" data-line="484" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function to camleize a string</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">camelize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keepCamel</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">False</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$normalizeLocale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>camelCase is a naming convention in which the
+first letter of each word in a compound word
+is capitalized, except for the first word.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>to convert to camelCase</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>string containing all characters, to
+separate the string at</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$keepCamel</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">False</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>keep camels – defaults to false</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$normalizeLocale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">de_DE</code> – have a look on to <code class="prettyprint">iconv</code>
+documentation since that is relevant for
+translating umlauts like <code class="prettyprint">Ä</code> into <code class="prettyprint">AE</code> ...</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_pascalize">
+        pascalize()
+        <a href="namespaces/default.html#function_pascalize" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">508</span>
+
+            <a href="files/src-functions.html#source-view.508"  class="phpdocumentor-element-found-in__source" data-line="508" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function to turn a string into PascalCase</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">pascalize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$keepCamel</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">False</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$normalizeLocale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+        <section class="phpdocumentor-description"><p>PascalCase is a naming convention in which the
+first letter of every word in a compound word
+is capitalized. The first letter is the only
+thing different to camelCase.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>to convert to PascalCase</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>string containing all characters, to
+separate the string at</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$keepCamel</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">False</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>keep camels – defaults to false</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$normalizeLocale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">de_DE</code> – have a look on to <code class="prettyprint">iconv</code>
+documentation since that is relevant for
+translating umlauts like <code class="prettyprint">Ä</code> into <code class="prettyprint">AE</code> ...</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_snakify">
+        snakify()
+        <a href="namespaces/default.html#function_snakify" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">542</span>
+
+            <a href="files/src-functions.html#source-view.542"  class="phpdocumentor-element-found-in__source" data-line="542" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">snakify a string</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">snakify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$chars</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$normalizeLocale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>to convert to snake_case</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$chars</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039; &#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>string containing all characters, to
+separate the string at</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$normalizeLocale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">&#039;de_DE&#039;</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">de_DE</code> – have a look on to <code class="prettyprint">iconv</code>
+documentation since that is relevant for
+translating umlauts like <code class="prettyprint">Ä</code> into <code class="prettyprint">AE</code> ...</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+        
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_str2bool">
+        str2bool()
+        <a href="namespaces/default.html#function_str2bool" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">561</span>
+
+            <a href="files/src-functions.html#source-view.561"  class="phpdocumentor-element-found-in__source" data-line="561" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function to convert a boolean string to real boolean</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">str2bool</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$check</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trueStrings</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">[&#039;1&#039;]</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$check</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>string to be checked</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$trueStrings</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">[&#039;1&#039;]</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"></section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>the converted value – <code class="prettyprint">true</code> or <code class="prettyprint">false</code></p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_startsWith">
+        startsWith()
+        <a href="namespaces/default.html#function_startsWith" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">589</span>
+
+            <a href="files/src-functions.html#source-view.589"  class="phpdocumentor-element-found-in__source" data-line="589" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function to check if a string begins with string sequence</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">startsWith</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$haystack</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$needle</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trim</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$haystack</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the haystack to search in</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$needle</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the string to search for in <code class="prettyprint">$haystack</code></p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$trim</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">false</code></p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool|string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>By default, the boolean check result value
+will be returned.
+If <code class="prettyprint">$trim</code> is set <code class="prettyprint">true</code>, the trimmed string
+will be returned.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_endsWith">
+        endsWith()
+        <a href="namespaces/default.html#function_endsWith" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">619</span>
+
+            <a href="files/src-functions.html#source-view.619"  class="phpdocumentor-element-found-in__source" data-line="619" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">function to check if a string ends with string sequence</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">endsWith</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$haystack</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$needle</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$trim</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool|string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$haystack</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the haystack to search in</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$needle</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>the string to search for in <code class="prettyprint">$haystack</code></p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$trim</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>defaults to <code class="prettyprint">false</code></p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool|string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>By default, the boolean check result value
+will be returned.
+If <code class="prettyprint">$trim</code> is set <code class="prettyprint">true</code>, the trimmed string
+will be returned.</p>
+</section>
+
+    
+</article>
+                    <article class="phpdocumentor-element -function - ">
+    <h4 class="phpdocumentor-element__name" id="function_in_array_recursive">
+        in_array_recursive()
+        <a href="namespaces/default.html#function_in_array_recursive" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/functions.php"><a href="files/src-functions.html"><abbr title="src/functions.php">functions.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">653</span>
+
+            <a href="files/src-functions.html#source-view.653"  class="phpdocumentor-element-found-in__source" data-line="653" data-modal="source-view"></a>
+    </aside>
+
+        <p class="phpdocumentor-summary">recursive in_array function</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility"></span>
+                <span class="phpdocumentor-signature__name">in_array_recursive</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$needle</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$haystack</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$strict</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$needle</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>element to be searched within <code class="prettyprint">$haystack</code></p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$haystack</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, mixed&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>haystack to be searched in</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$strict</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>if set true, a strict check by <code class="prettyprint">===</code> is performed
+instead of the simple check <code class="prettyprint">==</code></p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">bool</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>value found or not</p>
 </section>
 
     

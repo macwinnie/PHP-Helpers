@@ -151,6 +151,56 @@ Search.appendIndex(
             "summary": "Remove\u0020a\u0020directory\u0020and\u0020all\u0020its\u0020content",
             "url": "namespaces/default.html#function_rm_recursive"
         },                {
+            "fqsen": "\\trimIfString\u0028\u0029",
+            "name": "trimIfString",
+            "summary": "trim\u0020value\u0020if\u0020is\u0020a\u0020string",
+            "url": "namespaces/default.html#function_trimIfString"
+        },                {
+            "fqsen": "\\chunkString\u0028\u0029",
+            "name": "chunkString",
+            "summary": "helper\u0020function\u0020for\u0020chunking\u0020strings\u0020by\na\u0020bunch\u0020of\u0020separator\u0020characters",
+            "url": "namespaces/default.html#function_chunkString"
+        },                {
+            "fqsen": "\\decamelize\u0028\u0029",
+            "name": "decamelize",
+            "summary": "Invert\u0020the\u0020camelCase\u0020or\u0020PascalCase\u0020of\u0020a\u0020string\u0020into\u0020its\u0020parts.\u0020Case\u0020of\u0020words\u0020will\u0020not\u0020be\u0020changed\u0021",
+            "url": "namespaces/default.html#function_decamelize"
+        },                {
+            "fqsen": "\\camelize\u0028\u0029",
+            "name": "camelize",
+            "summary": "function\u0020to\u0020camleize\u0020a\u0020string",
+            "url": "namespaces/default.html#function_camelize"
+        },                {
+            "fqsen": "\\pascalize\u0028\u0029",
+            "name": "pascalize",
+            "summary": "function\u0020to\u0020turn\u0020a\u0020string\u0020into\u0020PascalCase",
+            "url": "namespaces/default.html#function_pascalize"
+        },                {
+            "fqsen": "\\snakify\u0028\u0029",
+            "name": "snakify",
+            "summary": "snakify\u0020a\u0020string",
+            "url": "namespaces/default.html#function_snakify"
+        },                {
+            "fqsen": "\\str2bool\u0028\u0029",
+            "name": "str2bool",
+            "summary": "function\u0020to\u0020convert\u0020a\u0020boolean\u0020string\u0020to\u0020real\u0020boolean",
+            "url": "namespaces/default.html#function_str2bool"
+        },                {
+            "fqsen": "\\startsWith\u0028\u0029",
+            "name": "startsWith",
+            "summary": "function\u0020to\u0020check\u0020if\u0020a\u0020string\u0020begins\u0020with\u0020string\u0020sequence",
+            "url": "namespaces/default.html#function_startsWith"
+        },                {
+            "fqsen": "\\endsWith\u0028\u0029",
+            "name": "endsWith",
+            "summary": "function\u0020to\u0020check\u0020if\u0020a\u0020string\u0020ends\u0020with\u0020string\u0020sequence",
+            "url": "namespaces/default.html#function_endsWith"
+        },                {
+            "fqsen": "\\in_array_recursive\u0028\u0029",
+            "name": "in_array_recursive",
+            "summary": "recursive\u0020in_array\u0020function",
+            "url": "namespaces/default.html#function_in_array_recursive"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
