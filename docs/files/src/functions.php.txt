@@ -426,7 +426,7 @@ function trimIfString( $var, $chars = NULL ) {
  * @param  string $normalizeLocale defaults to `de_DE` – have a look on to `iconv`
  * @return array                   list of chunks of string
  */
-function chunkString( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+function chunkString( $value, $chars = ' ', $normalizeLocale = 'de_DE' ) {
     $regex = REGEX_DELIMITER . '[' . delimiter_preg_quote ( $chars ) . ']' . REGEX_DELIMITER;
 
     setlocale( LC_ALL, $normalizeLocale );
@@ -449,7 +449,7 @@ function chunkString( string $value, string $chars = ' ', string $normalizeLocal
  *                                        implode the string parts of the camelCase / PascalCase
  *                                        string, that imploded string is returned.
  */
-function decamelize( string $camel, mixed $delimiterImplode = ' ' ) {
+function decamelize( $camel, $delimiterImplode = ' ' ) {
     $regex  = REGEX_DELIMITER . '(?=[A-Z])' . REGEX_DELIMITER;
     $pieces = preg_split( $regex, $camel );
     $pieces = array_filter( $pieces, fn( $value ) => ! is_null( $value ) && $value !== '' );
@@ -481,7 +481,7 @@ function decamelize( string $camel, mixed $delimiterImplode = ' ' ) {
  *
  * @return string
  */
-function camelize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
+function camelize( $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
     return lcfirst(
         pascalize( $value, $chars, $keepCamel, $normalizeLocale )
     );
@@ -505,7 +505,7 @@ function camelize( string $value, string $chars = ' ', bool $keepCamel = False, 
  *
  * @return string
  */
-function pascalize( string $value, string $chars = ' ', bool $keepCamel = False, string $normalizeLocale = 'de_DE' ) {
+function pascalize( $value, $chars = ' ', $keepCamel = False, $normalizeLocale = 'de_DE' ) {
 
     $chunks = chunkString( $value, $chars, $normalizeLocale );
 
@@ -539,7 +539,7 @@ function pascalize( string $value, string $chars = ' ', bool $keepCamel = False,
  *
  * @return string
  */
-function snakify( string $value, string $chars = ' ', string $normalizeLocale = 'de_DE' ) {
+function snakify( $value, $chars = ' ', $normalizeLocale = 'de_DE' ) {
 
     $chunks = chunkString( $value, $chars, $normalizeLocale );
 
@@ -558,7 +558,7 @@ function snakify( string $value, string $chars = ' ', string $normalizeLocale = 
  *
  * @return boolean                  the converted value – `true` or `false`
  */
-function str2bool( string $check, array $trueStrings = [ '1' ] ) {
+function str2bool( $check, $trueStrings = [ '1' ] ) {
     $check = val2boolEmptyNull( $check );
     if ( is_bool( $check ) ) {
         return $check;
@@ -586,7 +586,7 @@ function str2bool( string $check, array $trueStrings = [ '1' ] ) {
  *                               If `$trim` is set `true`, the trimmed string
  *                               will be returned.
  */
-function startsWith( string $haystack, string $needle, bool $trim = false ) {
+function startsWith( $haystack, $needle, $trim = false ) {
 
     $haystack = trim( $haystack );
     $length   = strlen( $needle );
@@ -616,7 +616,7 @@ function startsWith( string $haystack, string $needle, bool $trim = false ) {
  *                               If `$trim` is set `true`, the trimmed string
  *                               will be returned.
  */
-function endsWith( string $haystack, string $needle, bool $trim = false ) {
+function endsWith( $haystack, $needle, $trim = false ) {
 
     $haystack = trim( $haystack );
     $length   = strlen( $needle );
@@ -650,7 +650,7 @@ function endsWith( string $haystack, string $needle, bool $trim = false ) {
  *
  * @return boolean           value found or not
  */
-function in_array_recursive ( mixed $needle, array $haystack, bool $strict = false ) {
+function in_array_recursive ( $needle, $haystack, $strict = false ) {
 
     foreach ( $haystack as $item ) {
 
