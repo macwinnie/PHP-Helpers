@@ -93,9 +93,9 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Given the string - expected set
+     * @Given the value matrix
      */
-    public function theStringExpectedSet( TableNode $table ) {
+    public function theValueMatrix( TableNode $table ) {
         static::$envTest = $table->getHash();
     }
 
@@ -121,20 +121,13 @@ class AnyContext implements Context {
     }
 
     /**
-     * @Then transforming with val2boolEmptyNull returns the expected
+     * @Then boolean function :fkt returns expected values
      */
-    public function transformingWithValboolemptynullReturnsTheExpected() {
+    public function booleanFunctionReturnsExpectedValues( $fkt ) {
         foreach ( static::$envTest as $test ) {
             static::checkSpecial( $test[ 'expected' ]);
-            Assert::assertSame( $test[ 'expected' ], val2boolEmptyNull( $test[ 'string' ] ) );
+            Assert::assertSame( $test[ 'expected' ], $fkt( $test[ 'string' ] ) );
         }
-    }
-
-    /**
-     * @Given the env - value - expected set
-     */
-    public function theEnvValueExpectedSet( TableNode $table ) {
-        static::$envTest = $table->getHash();
     }
 
     /**
@@ -147,4 +140,81 @@ class AnyContext implements Context {
             Assert::assertSame( $test[ 'expected' ], env( $test[ 'env' ] ) );
         }
     }
+
+    /**
+     * @Given trimming quotes from :arg1 attributes
+     */
+    public function trimmingQuotesFromAttributes( $arg1 ){
+        foreach ( static::$envTest as &$test ) {
+
+            $attr = $test[ $arg1 ];
+            $a    = substr( $attr,  0, 1);
+            $o    = substr( $attr, -1, 1);
+            $quotes = [ '"', "'" ];
+
+            if ( $a == $o and in_array( $a, $quotes ) ) {
+                $test[ $arg1 ] = substr( $attr, 1, strlen( $attr ) - 2 );
+            }
+        }
+    }
+
+    /**
+     * @Then camelize by underscore returns expected values
+     */
+    public function camelizeByUnderscoreReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ], '_' ) );
+        }
+    }
+
+    /**
+     * @Then camelize keeping camels returns expected values
+     */
+    public function camelizeKeepingCamelsReturnsExpectedValues() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], camelize( $test[ 'string' ], ' _', true ) );
+        }
+    }
+
+    /**
+     * @Then function :fkt returns expected values
+     */
+    public function functionReturnsExpectedValues( $fkt ) {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame( $test[ 'expected' ], $fkt( $test[ 'string' ] ) );
+        }
+    }
+
+    /**
+     * @Then running startsWith function returns expected
+     */
+    public function runningStartswithFunctionReturnsExpected() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame(
+                val2boolEmptyNull( $test[ 'expected' ] ),
+                startsWith(
+                    $test[ 'haystack' ],
+                    $test[ 'needle' ],
+                    str2bool( $test[ 'trim' ] )
+                )
+            );
+        }
+    }
+
+    /**
+     * @Then running endsWith function returns expected
+     */
+    public function runningEndswithFunctionReturnsExpected() {
+        foreach ( static::$envTest as $test ) {
+            Assert::assertSame(
+                val2boolEmptyNull( $test[ 'expected' ] ),
+                endsWith(
+                    $test[ 'haystack' ],
+                    $test[ 'needle' ],
+                    str2bool( $test[ 'trim' ] )
+                )
+            );
+        }
+    }
+
 }
