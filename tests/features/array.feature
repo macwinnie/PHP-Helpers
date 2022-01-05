@@ -133,3 +133,24 @@ Feature: work with arrays
       """
       "lorem"
       """
+
+  @compactObject
+  Scenario: On a given object, compacting properties resulting in correct array
+    Given the JSON object
+      """
+      {
+        "lorem":      "ipsum",
+        "dolor":      "sit",
+        "amet":       "consetetur",
+        "sadipscing": "elitr"
+      }
+      """
+    And compacting the values "lorem,dolor,amet"
+    Then the resulting array equals JSON
+      """
+      {
+        "lorem":      "ipsum",
+        "dolor":      "sit",
+        "amet":       "consetetur"
+      }
+      """

@@ -305,9 +305,16 @@ function randomString( $length = 16, $alphabets = NULL ) {
     return $result;
 }
 
-if ( ! function_exists( 'env' ) ) {
+if (
+
+    ! function_exists( 'env' ) or
+
+    isset( $_ENV[ 'MACWINNIE_ENV' ] ) and
+    val2boolEmptyNull( $_ENV[ 'MACWINNIE_ENV' ] )
+) {
     /**
      * Gets the value of an environment variable. Supports boolean, empty and null.
+     * Will override existing `env` function if environmental variable `MACWINNIE_ENV` is `true`.
      *
      * @param  string  $key
      * @param  mixed   $default
@@ -663,4 +670,23 @@ function in_array_recursive ( $needle, $haystack, $strict = false ) {
     }
 
     return false;
+}
+
+/**
+ * Basic functionality like `compact` function – but based on an object
+ *
+ * @param  mixed $object     The object, the properties will be fetched from
+ * @param  mixed $properties Properties to be fetched
+ * @return array             Associative array of property names to property values
+ */
+function compactWith( $object, ...$properties ): array {
+    array_map(
+        function ( $helper ) use ( $object, &$result) {
+            $result[ $helper ] = is_array( $helper ) ?
+                                 compactWith( $obj, ...$helper ) :
+                                 $object -> $helper;
+        },
+        $properties
+    );
+    return $result ?? [];
 }

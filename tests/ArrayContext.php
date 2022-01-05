@@ -15,23 +15,32 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
  */
 class ArrayContext implements Context {
 
-    protected static $inspectedArray = [];
-    protected static $foundValue     = NULL;
+    protected static $inspectedArray  = [];
+    protected static $inspectedObject = NULL;
+    protected static $foundValue      = NULL;
 
     /**
      * @BeforeScenario
      */
     // prepare for scenario execution
     public static function prepareForTheScenario( BeforeScenarioScope $scope ) {
-        static::$inspectedArray = [];
-        static::$foundValue     = NULL;
+        static::$inspectedArray  = [];
+        static::$inspectedObject = NULL;
+        static::$foundValue      = NULL;
     }
 
     /**
      * @Given the JSON array
      */
     public function theJsonArray( PyStringNode $string ) {
-        static::$inspectedArray = json_decode( $string, true );
+        static::$inspectedArray = $this->jsonString2Array( $string );
+    }
+
+    /**
+     * @Given the JSON object
+     */
+    public function theJsonObject( PyStringNode $string ) {
+        static::$inspectedObject = json_decode( $string );
         try {
             Assert::assertEquals( JSON_ERROR_NONE, json_last_error() );
         } catch ( ExpectationFailedException $e ) {
@@ -98,4 +107,44 @@ class ArrayContext implements Context {
             )
         );
     }
+
+    /**
+     * @Given compacting the values :commaseparated
+     */
+    public function compactingTheValues( $commaseparated ) {
+
+        $functionValues = array_map( 'trim', explode( ',', $commaseparated ) );
+        array_unshift( $functionValues, static::$inspectedObject );
+
+        static::$foundValue = call_user_func_array( "compactWith", $functionValues );
+    }
+
+    /**
+     * @Then the resulting array equals JSON
+     */
+    public function theResultingArrayEqualsJson( PyStringNode $string ) {
+        $shouldBe = $this->jsonString2Array( $string );
+
+        Assert::assertEqualsCanonicalizing( $shouldBe, static::$foundValue );
+    }
+
+    /**
+     * helper function to convert string to JSON Array
+     *
+     * @param  string $string JSON String
+     * @return array          result of json_decode
+     */
+    private function jsonString2Array( $string ) {
+
+        $result = json_decode( $string, true );
+
+        try {
+            Assert::assertEquals( JSON_ERROR_NONE, json_last_error() );
+        } catch ( ExpectationFailedException $e ) {
+            throw new ExpectationFailedException( 'JSON Error: ' . json_last_error_msg() );
+        }
+
+        return $result;
+    }
+
 }

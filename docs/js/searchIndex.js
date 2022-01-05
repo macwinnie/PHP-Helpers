@@ -201,6 +201,11 @@ Search.appendIndex(
             "summary": "recursive\u0020in_array\u0020function",
             "url": "namespaces/default.html#function_in_array_recursive"
         },                {
+            "fqsen": "\\compactWith\u0028\u0029",
+            "name": "compactWith",
+            "summary": "Basic\u0020functionality\u0020like\u0020\u0060compact\u0060\u0020function\u0020\u2013\u0020but\u0020based\u0020on\u0020an\u0020object",
+            "url": "namespaces/default.html#function_compactWith"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
